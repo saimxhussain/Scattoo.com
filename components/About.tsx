@@ -11,7 +11,7 @@ const metrics = [
 
 function CountUp({ target, suffix, started }: { target: number, suffix: string, started: boolean }) {
   const [count, setCount] = useState(0)
-  const rafRef = useRef<number>()
+  const rafRef = useRef<number | undefined>(undefined)
 
   useEffect(() => {
     if (!started) return
