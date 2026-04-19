@@ -9,37 +9,40 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="process" style={{ padding: '120px 0', background: '#fff', borderBottom: '1px solid #f0f0f0' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px' }}>
+    <section id="process" style={{ padding: '120px 0', borderBottom: '1px solid rgba(255,255,255,0.06)', position: 'relative', overflow: 'hidden' }}>
+      <div className="orb" style={{ width: 350, height: 350, background: 'rgba(100,60,255,0.07)', bottom: -80, right: -80, animation: 'orbMove 20s ease-in-out infinite' }} />
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
         <Reveal>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
             <span style={{ width: 24, height: 3, background: '#FF4D00', borderRadius: 2 }} />
             <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#FF4D00' }}>Process / Timeline</span>
           </div>
-          <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: '#0a0a0a', marginBottom: 72 }}>
+          <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: '#fff', marginBottom: 72 }}>
             How it works,<br /><span style={{ color: '#FF4D00' }}>step by step.</span>
           </h2>
         </Reveal>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
           {steps.map((s, i) => (
             <Reveal key={i} delay={i * 100}>
               <div style={{
-                display: 'grid', gridTemplateColumns: '1fr 1fr',
-                background: i % 2 === 0 ? '#fafafa' : '#fff',
+                display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                background: 'rgba(255,255,255,0.04)',
+                backdropFilter: 'blur(24px)',
+                WebkitBackdropFilter: 'blur(24px)',
                 borderRadius: 16, overflow: 'hidden',
-                border: '1.5px solid #f0f0f0',
+                border: '1px solid rgba(255,255,255,0.08)',
               }}>
-                <div style={{ padding: '64px 52px', display: 'flex', flexDirection: 'column', justifyContent: 'center', order: i % 2 === 0 ? 0 : 1 }}>
-                  <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(80px, 10vw, 130px)', color: 'rgba(255,77,0,0.08)', lineHeight: 0.8, marginBottom: 20, userSelect: 'none', letterSpacing: -4 }}>{s.num}</div>
-                  <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(28px, 3.5vw, 44px)', color: '#0a0a0a', letterSpacing: -1, marginBottom: 6, lineHeight: 1 }}>{s.title}</div>
+                <div style={{ padding: '52px 44px', display: 'flex', flexDirection: 'column', justifyContent: 'center', order: i % 2 === 0 ? 0 : 1 }}>
+                  <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(70px, 10vw, 120px)', color: 'rgba(255,77,0,0.10)', lineHeight: 0.8, marginBottom: 20, userSelect: 'none', letterSpacing: -4 }}>{s.num}</div>
+                  <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(26px, 3.5vw, 42px)', color: '#fff', letterSpacing: -1, marginBottom: 6, lineHeight: 1 }}>{s.title}</div>
                   <div style={{ fontSize: 13, fontWeight: 600, color: '#FF4D00', letterSpacing: 0.5 }}>{s.sub}</div>
                 </div>
-                <div style={{ padding: '64px 52px', display: 'flex', flexDirection: 'column', justifyContent: 'center', order: i % 2 === 0 ? 1 : 0, background: i % 2 === 0 ? '#fff' : '#fafafa' }}>
-                  <p style={{ fontSize: 15, fontWeight: 400, color: '#666', lineHeight: 1.85, marginBottom: 28, maxWidth: 420 }}>{s.desc}</p>
+                <div style={{ padding: '52px 44px', display: 'flex', flexDirection: 'column', justifyContent: 'center', order: i % 2 === 0 ? 1 : 0, background: 'rgba(255,255,255,0.03)', borderLeft: '1px solid rgba(255,255,255,0.06)' }}>
+                  <p style={{ fontSize: 15, fontWeight: 400, color: 'rgba(255,255,255,0.55)', lineHeight: 1.85, marginBottom: 28, maxWidth: 420 }}>{s.desc}</p>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                     {s.tags.map((t, j) => (
-                      <span key={j} style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 11, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', color: '#FF4D00', background: 'rgba(255,77,0,0.07)', padding: '5px 12px', borderRadius: 6 }}>{t}</span>
+                      <span key={j} style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 11, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', color: '#FF4D00', background: 'rgba(255,77,0,0.10)', border: '1px solid rgba(255,77,0,0.2)', padding: '5px 12px', borderRadius: 6 }}>{t}</span>
                     ))}
                   </div>
                 </div>

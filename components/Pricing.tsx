@@ -24,30 +24,33 @@ const plans = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" style={{ padding: '120px 0', background: '#fff', borderBottom: '1px solid #f0f0f0' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px' }}>
+    <section id="pricing" style={{ padding: '120px 0', borderBottom: '1px solid rgba(255,255,255,0.06)', position: 'relative', overflow: 'hidden' }}>
+      <div className="orb" style={{ width: 450, height: 450, background: 'rgba(255,77,0,0.07)', top: -100, left: '50%', transform: 'translateX(-50%)', animation: 'orbMove2 14s ease-in-out infinite' }} />
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
         <Reveal>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
             <span style={{ width: 24, height: 3, background: '#FF4D00', borderRadius: 2 }} />
             <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#FF4D00' }}>Pricing / No Subscriptions</span>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 20 }}>
-            <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: '#0a0a0a' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 20, flexWrap: 'wrap', gap: 16 }}>
+            <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: '#fff' }}>
               Pay for results.<br /><span style={{ color: '#FF4D00' }}>Own it forever.</span>
             </h2>
-            <p style={{ fontSize: 14, color: '#999', maxWidth: 280, textAlign: 'right', lineHeight: 1.6 }}>No retainers. No monthly fees.<br />You pay for what we build.</p>
+            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', maxWidth: 280, textAlign: 'right', lineHeight: 1.6 }}>No retainers. No monthly fees.<br />You pay for what we build.</p>
           </div>
         </Reveal>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, marginTop: 52 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16, marginTop: 52 }}>
           {plans.map((p, i) => (
             <Reveal key={i} delay={i * 80}>
               <div style={{
-                background: p.featured ? '#0a0a0a' : '#fafafa',
-                padding: '44px 36px', borderRadius: 20,
-                border: p.featured ? '2px solid #FF4D00' : '1.5px solid #f0f0f0',
+                background: p.featured ? 'rgba(255,77,0,0.12)' : 'rgba(255,255,255,0.04)',
+                backdropFilter: 'blur(32px)',
+                WebkitBackdropFilter: 'blur(32px)',
+                padding: '40px 32px', borderRadius: 20,
+                border: p.featured ? '1px solid rgba(255,77,0,0.4)' : '1px solid rgba(255,255,255,0.08)',
                 position: 'relative', height: '100%', display: 'flex', flexDirection: 'column',
-                boxShadow: p.featured ? '0 20px 60px rgba(255,77,0,0.15)' : 'none',
+                boxShadow: p.featured ? '0 20px 60px rgba(255,77,0,0.2), inset 0 1px 0 rgba(255,77,0,0.3)' : 'none',
                 transform: p.featured ? 'translateY(-8px)' : 'none',
               }}>
                 {p.tag && (
@@ -56,15 +59,16 @@ export default function Pricing() {
                     fontFamily: 'EquitanSans, sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: 2,
                     textTransform: 'uppercase', background: '#FF4D00', color: '#fff',
                     padding: '5px 18px', borderRadius: 20, whiteSpace: 'nowrap',
+                    boxShadow: '0 4px 16px rgba(255,77,0,0.5)',
                   }}>{p.tag}</div>
                 )}
-                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: p.featured ? '#FF4D00' : '#aaa', marginBottom: 20 }}>{p.label}</div>
-                <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: p.price === 'Custom' ? 44 : 56, color: p.featured ? '#fff' : '#0a0a0a', lineHeight: 1, letterSpacing: -2, marginBottom: 4 }}>{p.price}</div>
-                <div style={{ fontSize: 12, fontWeight: 400, color: p.featured ? '#888' : '#aaa', letterSpacing: 0.5, marginBottom: 20 }}>{p.sub}</div>
-                <p style={{ fontSize: 13, fontWeight: 400, color: p.featured ? '#aaa' : '#777', lineHeight: 1.7, marginBottom: 28, paddingBottom: 28, borderBottom: `1px solid ${p.featured ? 'rgba(255,255,255,0.08)' : '#f0f0f0'}` }}>{p.desc}</p>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12, flex: 1, marginBottom: 32 }}>
+                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: p.featured ? '#FF4D00' : 'rgba(255,255,255,0.3)', marginBottom: 20 }}>{p.label}</div>
+                <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: p.price === 'Custom' ? 44 : 56, color: '#fff', lineHeight: 1, letterSpacing: -2, marginBottom: 4 }}>{p.price}</div>
+                <div style={{ fontSize: 12, fontWeight: 400, color: 'rgba(255,255,255,0.35)', letterSpacing: 0.5, marginBottom: 20 }}>{p.sub}</div>
+                <p style={{ fontSize: 13, fontWeight: 400, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, marginBottom: 24, paddingBottom: 24, borderBottom: `1px solid ${p.featured ? 'rgba(255,77,0,0.2)' : 'rgba(255,255,255,0.08)'}` }}>{p.desc}</p>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12, flex: 1, marginBottom: 28 }}>
                   {p.features.map((f, j) => (
-                    <li key={j} style={{ fontSize: 13, fontWeight: 400, color: p.featured ? '#ccc' : '#666', display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <li key={j} style={{ fontSize: 13, fontWeight: 400, color: 'rgba(255,255,255,0.6)', display: 'flex', alignItems: 'center', gap: 10 }}>
                       <span style={{ color: '#FF4D00', fontSize: 14, fontWeight: 700, flexShrink: 0 }}>✓</span>{f}
                     </li>
                   ))}
@@ -73,14 +77,14 @@ export default function Pricing() {
                   fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 12,
                   letterSpacing: 1, textTransform: 'uppercase',
                   background: p.featured ? '#FF4D00' : 'transparent',
-                  color: p.featured ? '#fff' : '#0a0a0a',
-                  padding: '14px 24px', textDecoration: 'none',
-                  border: p.featured ? 'none' : '1.5px solid #e0e0e0',
+                  color: '#fff', padding: '14px 24px', textDecoration: 'none',
+                  border: p.featured ? 'none' : '1px solid rgba(255,255,255,0.15)',
                   textAlign: 'center', transition: 'all 0.2s', display: 'block', borderRadius: 10,
-                  boxShadow: p.featured ? '0 4px 20px rgba(255,77,0,0.3)' : 'none',
+                  boxShadow: p.featured ? '0 4px 20px rgba(255,77,0,0.4)' : 'none',
+                  backdropFilter: p.featured ? 'none' : 'blur(12px)',
                 }}
-                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; if (p.featured) { el.style.background = '#e04400' } else { el.style.borderColor = '#FF4D00'; el.style.color = '#FF4D00' } }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; if (p.featured) { el.style.background = '#FF4D00' } else { el.style.borderColor = '#e0e0e0'; el.style.color = '#0a0a0a' } }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; if (p.featured) { el.style.background = '#e04400'; el.style.boxShadow = '0 8px 32px rgba(255,77,0,0.6)' } else { el.style.borderColor = '#FF4D00'; el.style.color = '#FF4D00'; el.style.background = 'rgba(255,77,0,0.08)' } }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; if (p.featured) { el.style.background = '#FF4D00'; el.style.boxShadow = '0 4px 20px rgba(255,77,0,0.4)' } else { el.style.borderColor = 'rgba(255,255,255,0.15)'; el.style.color = '#fff'; el.style.background = 'transparent' } }}
                 >{p.cta} →</a>
               </div>
             </Reveal>

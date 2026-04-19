@@ -27,58 +27,61 @@ const cases = [
 
 export default function CaseStudies() {
   return (
-    <section id="case-studies" style={{ padding: '120px 0', background: '#fafafa', borderBottom: '1px solid #f0f0f0' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px' }}>
+    <section id="case-studies" style={{ padding: '120px 0', borderBottom: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px' }}>
         <Reveal>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
             <span style={{ width: 24, height: 3, background: '#FF4D00', borderRadius: 2 }} />
             <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#FF4D00' }}>Case Studies</span>
           </div>
-          <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: '#0a0a0a', marginBottom: 72 }}>
+          <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: '#fff', marginBottom: 72 }}>
             The data you need.<br /><span style={{ color: '#FF4D00' }}>Real outcomes.</span>
           </h2>
         </Reveal>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           {cases.map((c, i) => (
             <Reveal key={i} delay={80}>
-              <div style={{ background: '#fff', borderRadius: 20, border: '1.5px solid #f0f0f0', overflow: 'hidden' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', borderBottom: '1px solid #f5f5f5' }}>
+              <div style={{
+                background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
+                borderRadius: 20, border: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden',
+              }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
                   {/* Info */}
-                  <div style={{ padding: '44px 40px', borderRight: '1px solid #f5f5f5' }}>
-                    <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#aaa', marginBottom: 10 }}>{c.tag}</div>
-                    <h3 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(24px, 2.5vw, 36px)', color: '#0a0a0a', letterSpacing: -1, lineHeight: 1.1, marginBottom: 16 }}>{c.title}</h3>
-                    <p style={{ fontSize: 13, fontWeight: 400, color: '#777', lineHeight: 1.75, marginBottom: 20 }}>{c.desc}</p>
+                  <div style={{ padding: '36px 32px', borderRight: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 10 }}>{c.tag}</div>
+                    <h3 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(22px, 2.5vw, 32px)', color: '#fff', letterSpacing: -1, lineHeight: 1.1, marginBottom: 16 }}>{c.title}</h3>
+                    <p style={{ fontSize: 13, fontWeight: 400, color: 'rgba(255,255,255,0.5)', lineHeight: 1.75, marginBottom: 20 }}>{c.desc}</p>
                     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                      {c.tags.map((t, j) => <span key={j} style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: '#FF4D00', background: 'rgba(255,77,0,0.07)', padding: '4px 10px', borderRadius: 6 }}>{t}</span>)}
+                      {c.tags.map((t, j) => <span key={j} style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: '#FF4D00', background: 'rgba(255,77,0,0.10)', border: '1px solid rgba(255,77,0,0.2)', padding: '4px 10px', borderRadius: 6 }}>{t}</span>)}
                     </div>
                   </div>
                   {/* Before */}
-                  <div style={{ padding: '44px 36px', borderRight: '1px solid #f5f5f5' }}>
-                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#bbb', marginBottom: 24 }}>Before Scattoo</div>
+                  <div style={{ padding: '36px 32px', borderRight: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: 24 }}>Before Scattoo</div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                       {c.before.map((b, j) => (
-                        <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 14, borderBottom: '1px solid #f5f5f5' }}>
-                          <span style={{ fontSize: 12, color: '#888' }}>{b.l}</span>
-                          <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 14, color: '#ccc' }}>{b.v}</span>
+                        <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 14, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                          <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)' }}>{b.l}</span>
+                          <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 14, color: 'rgba(255,255,255,0.25)' }}>{b.v}</span>
                         </div>
                       ))}
                     </div>
                   </div>
                   {/* After */}
-                  <div style={{ padding: '44px 36px', background: '#fff9f6' }}>
+                  <div style={{ padding: '36px 32px', background: 'rgba(255,77,0,0.04)' }}>
                     <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#FF4D00', marginBottom: 24 }}>After Scattoo</div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                       {c.after.map((a, j) => (
                         <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 14, borderBottom: '1px solid rgba(255,77,0,0.08)' }}>
-                          <span style={{ fontSize: 12, color: '#888' }}>{a.l}</span>
+                          <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)' }}>{a.l}</span>
                           <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 14, color: '#FF4D00' }}>{a.v}</span>
                         </div>
                       ))}
                     </div>
                     <div style={{ marginTop: 20, display: 'inline-flex', alignItems: 'baseline', gap: 6 }}>
                       <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 36, color: '#FF4D00', letterSpacing: -1 }}>{c.result}</span>
-                      <span style={{ fontSize: 12, color: '#aaa', fontWeight: 500 }}>{c.resultLabel}</span>
+                      <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', fontWeight: 500 }}>{c.resultLabel}</span>
                     </div>
                   </div>
                 </div>
