@@ -10,12 +10,16 @@ import Services from '@/components/Services'
 import Pricing from '@/components/Pricing'
 import CTA from '@/components/CTA'
 import Footer from '@/components/Footer'
+import FloatingCTA from '@/components/FloatingCTA'
+import PageLoader from '@/components/PageLoader'
 
 export default function Home() {
   return (
     <>
+      <PageLoader />
       <Cursor />
       <Navbar />
+      <FloatingCTA />
       <main>
         <Hero />
         <Ticker />
