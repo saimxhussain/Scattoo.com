@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 const TABS = [
-  { id: 'b2b', label: 'B2B Lead Generator', tag: 'Lead Gen', src: '/b2b-lead-gen.gif' },
+  { id: 'b2b', label: 'B2B Lead Generator', tag: 'Lead Gen', src: '/b2b-lead-gen.mp4' },
   { id: 'li', label: 'LinkedIn Scraper', tag: 'Prospecting', src: '/linkedin-scraper.gif' },
 ]
 
@@ -131,11 +131,25 @@ export default function Hero() {
               opacity: animating ? 0 : 1, transform: animating ? 'translateY(8px)' : 'translateY(0)',
               transition: 'opacity 0.22s ease, transform 0.22s ease',
             }}>
-              <img
-                src={TABS[displayed].src}
-                alt={TABS[displayed].label}
-                style={{ width: '100%', display: 'block', maxHeight: 380, objectFit: 'cover' }}
-              />
+              {TABS[displayed].src.endsWith('.mp4') ? (
+                <video
+                  key={TABS[displayed].src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  style={{ width: '100%', display: 'block', maxHeight: 380, objectFit: 'cover' }}
+                >
+                  <source src={TABS[displayed].src} type="video/mp4" />
+                </video>
+              ) : (
+                <img
+                  key={TABS[displayed].src}
+                  src={TABS[displayed].src}
+                  alt={TABS[displayed].label}
+                  style={{ width: '100%', display: 'block', maxHeight: 380, objectFit: 'cover' }}
+                />
+              )}
             </div>
 
             {/* tag pill */}
