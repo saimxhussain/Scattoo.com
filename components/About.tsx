@@ -1,12 +1,71 @@
 'use client'
+import { useEffect, useRef, useState } from 'react'
 import Reveal from './Reveal'
 
 const metrics = [
-  { val: '10X', label: 'Faster lead generation pipeline' },
-  { val: '80%', label: 'Reduction in manual work hours' },
-  { val: '24/7', label: 'AI agents, never sleeping' },
-  { val: '300+', label: 'Qualified leads per week, automated' },
+  { val: '10', suffix: 'X', label: 'Faster lead generation pipeline' },
+  { val: '80', suffix: '%', label: 'Reduction in manual work hours' },
+  { val: '24', suffix: '/7', label: 'AI agents, never sleeping' },
+  { val: '300', suffix: '+', label: 'Qualified leads per week, automated' },
 ]
+
+function CountUp({ target, suffix, started }: { target: number, suffix: string, started: boolean }) {
+  const [count, setCount] = useState(0)
+  const rafRef = useRef<number>()
+
+  useEffect(() => {
+    if (!started) return
+    const duration = 1800
+    const start = performance.now()
+    const animate = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1)
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setCount(Math.floor(eased * target))
+      if (progress < 1) rafRef.current = requestAnimationFrame(animate)
+    }
+    rafRef.current = requestAnimationFrame(animate)
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
+  }, [started, target])
+
+  return <>{count}{suffix}</>
+}
+
+function MetricCard({ m, i }: { m: typeof metrics[0], i: number }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [started, setStarted] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setStarted(true); obs.disconnect() }
+    }, { threshold: 0.5 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  return (
+    <div ref={ref} style={{
+      background: i === 0 ? '#FF4D00' : 'rgba(255,255,255,0.05)',
+      backdropFilter: 'blur(24px)',
+      WebkitBackdropFilter: 'blur(24px)',
+      border: i === 0 ? 'none' : '1px solid rgba(255,255,255,0.10)',
+      padding: '32px 24px',
+      borderRadius: i === 0 ? '16px 4px 4px 4px' : i === 1 ? '4px 16px 4px 4px' : i === 2 ? '4px 4px 4px 16px' : '4px 4px 16px 4px',
+      boxShadow: i === 0 ? '0 8px 32px rgba(255,77,0,0.3)' : 'none',
+      transition: 'transform 0.2s, box-shadow 0.2s',
+    }}
+      onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-4px)'; el.style.boxShadow = i === 0 ? '0 16px 48px rgba(255,77,0,0.45)' : '0 8px 32px rgba(0,0,0,0.3)' }}
+      onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = i === 0 ? '0 8px 32px rgba(255,77,0,0.3)' : 'none' }}
+    >
+      <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 40, color: i === 0 ? '#fff' : '#FF4D00', lineHeight: 1, letterSpacing: -1, marginBottom: 8 }}>
+        <CountUp target={parseInt(m.val)} suffix={m.suffix} started={started} />
+      </div>
+      <div style={{ fontSize: 12, fontWeight: 500, color: i === 0 ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.45)', lineHeight: 1.5 }}>{m.label}</div>
+    </div>
+  )
+}
 
 export default function About() {
   return (
@@ -31,20 +90,7 @@ export default function About() {
               </p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3 }}>
-              {metrics.map((m, i) => (
-                <div key={i} style={{
-                  background: i === 0 ? '#FF4D00' : 'rgba(255,255,255,0.05)',
-                  backdropFilter: 'blur(24px)',
-                  WebkitBackdropFilter: 'blur(24px)',
-                  border: i === 0 ? 'none' : '1px solid rgba(255,255,255,0.10)',
-                  padding: '32px 24px',
-                  borderRadius: i === 0 ? '16px 4px 4px 4px' : i === 1 ? '4px 16px 4px 4px' : i === 2 ? '4px 4px 4px 16px' : '4px 4px 16px 4px',
-                  boxShadow: i === 0 ? '0 8px 32px rgba(255,77,0,0.3)' : 'none',
-                }}>
-                  <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 40, color: i === 0 ? '#fff' : '#FF4D00', lineHeight: 1, letterSpacing: -1, marginBottom: 8 }}>{m.val}</div>
-                  <div style={{ fontSize: 12, fontWeight: 500, color: i === 0 ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.45)', lineHeight: 1.5 }}>{m.label}</div>
-                </div>
-              ))}
+              {metrics.map((m, i) => <MetricCard key={i} m={m} i={i} />)}
             </div>
           </div>
         </Reveal>
