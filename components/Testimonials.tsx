@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Reveal from './Reveal'
 import Image from 'next/image'
 
@@ -41,15 +41,39 @@ const cards = [
   },
 ]
 
+const INTERVAL = 4000
+
 export default function Testimonials() {
   const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const card = cards[active]
 
-  const prev = () => setActive(i => Math.max(0, i - 1))
-  const next = () => setActive(i => Math.min(cards.length - 1, i + 1))
+  // Auto-advance
+  useEffect(() => {
+    if (paused) return
+    intervalRef.current = setInterval(() => {
+      setActive(i => (i + 1) % cards.length)
+    }, INTERVAL)
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
+  }, [paused, active])
+
+  const goTo = (i: number) => {
+    setActive(i)
+    // Reset timer on manual interaction
+    if (intervalRef.current) clearInterval(intervalRef.current)
+    setPaused(false)
+  }
+
+  const prev = () => goTo((active - 1 + cards.length) % cards.length)
+  const next = () => goTo((active + 1) % cards.length)
 
   return (
-    <section style={{ padding: '120px 0', background: '#fafafa', borderBottom: '1px solid #f0f0f0', overflow: 'hidden' }}>
+    <section
+      style={{ padding: '120px 0', background: '#fafafa', borderBottom: '1px solid #f0f0f0', overflow: 'hidden' }}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px' }}>
 
         {/* Header */}
@@ -64,30 +88,28 @@ export default function Testimonials() {
             </h2>
             {/* Arrows */}
             <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-              <button onClick={prev} disabled={active === 0} style={{
+              <button onClick={prev} style={{
                 width: 52, height: 52, borderRadius: 12, border: '1.5px solid #e0e0e0',
-                background: active === 0 ? '#f5f5f5' : '#fff',
-                cursor: active === 0 ? 'not-allowed' : 'pointer',
+                background: '#fff', cursor: 'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                transition: 'all 0.2s', color: active === 0 ? '#ccc' : '#0a0a0a',
-                boxShadow: active === 0 ? 'none' : '0 2px 8px rgba(0,0,0,0.08)',
+                transition: 'all 0.2s', color: '#0a0a0a',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
               }}
-                onMouseEnter={e => { if (active > 0) { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#FF4D00'; el.style.color = '#FF4D00' } }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#e0e0e0'; el.style.color = active === 0 ? '#ccc' : '#0a0a0a' }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#FF4D00'; el.style.color = '#FF4D00' }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#e0e0e0'; el.style.color = '#0a0a0a' }}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
               </button>
               <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 13, fontWeight: 600, color: '#aaa', minWidth: 40, textAlign: 'center' }}>{active + 1} / {cards.length}</span>
-              <button onClick={next} disabled={active === cards.length - 1} style={{
+              <button onClick={next} style={{
                 width: 52, height: 52, borderRadius: 12, border: '1.5px solid #e0e0e0',
-                background: active === cards.length - 1 ? '#f5f5f5' : '#fff',
-                cursor: active === cards.length - 1 ? 'not-allowed' : 'pointer',
+                background: '#fff', cursor: 'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                transition: 'all 0.2s', color: active === cards.length - 1 ? '#ccc' : '#0a0a0a',
-                boxShadow: active === cards.length - 1 ? 'none' : '0 2px 8px rgba(0,0,0,0.08)',
+                transition: 'all 0.2s', color: '#0a0a0a',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
               }}
-                onMouseEnter={e => { if (active < cards.length - 1) { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#FF4D00'; el.style.color = '#FF4D00' } }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#e0e0e0'; el.style.color = active === cards.length - 1 ? '#ccc' : '#0a0a0a' }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#FF4D00'; el.style.color = '#FF4D00' }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#e0e0e0'; el.style.color = '#0a0a0a' }}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
               </button>
@@ -98,9 +120,8 @@ export default function Testimonials() {
         {/* SPLIT LAYOUT */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
 
-          {/* LEFT — Image carousel (1:1) */}
+          {/* LEFT — Image stack (1:1) */}
           <div style={{ position: 'relative' }}>
-            {/* Stacked cards */}
             <div style={{ position: 'relative', width: '100%', paddingBottom: '100%' }}>
               {cards.map((c, i) => {
                 const offset = i - active
@@ -115,12 +136,12 @@ export default function Testimonials() {
                 return (
                   <div
                     key={i}
-                    onClick={() => { if (i !== active) setActive(i) }}
+                    onClick={() => goTo(i)}
                     style={{
                       position: 'absolute', inset: 0,
                       transform: `translate(${x}px, ${y}px) rotate(${rotate}deg) scale(${scale})`,
                       zIndex, opacity,
-                      transition: 'all 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
+                      transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                       cursor: offset === 0 ? 'default' : 'pointer',
                       borderRadius: 20, overflow: 'hidden',
                       boxShadow: i === active
@@ -128,27 +149,30 @@ export default function Testimonials() {
                         : '0 8px 24px rgba(0,0,0,0.1)',
                     }}
                   >
-                    <Image
-                      src={c.src}
-                      alt={c.alt}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                      sizes="(max-width: 1280px) 50vw, 580px"
-                    />
+                    <Image src={c.src} alt={c.alt} fill style={{ objectFit: 'cover' }} sizes="(max-width: 1280px) 50vw, 580px" />
                   </div>
                 )
               })}
             </div>
 
-            {/* Dot indicators below image */}
+            {/* Progress dots with animated fill */}
             <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 28 }}>
               {cards.map((_, i) => (
-                <button key={i} onClick={() => setActive(i)} style={{
+                <button key={i} onClick={() => goTo(i)} style={{
                   width: i === active ? 28 : 8, height: 8, borderRadius: 4,
                   border: 'none', padding: 0,
                   background: i === active ? '#FF4D00' : '#e0e0e0',
                   cursor: 'pointer', transition: 'all 0.3s ease',
-                }} />
+                  position: 'relative', overflow: 'hidden',
+                }}>
+                  {i === active && !paused && (
+                    <span style={{
+                      position: 'absolute', inset: 0, borderRadius: 4,
+                      background: 'rgba(255,255,255,0.4)',
+                      animation: `dotFill ${INTERVAL}ms linear forwards`,
+                    }} />
+                  )}
+                </button>
               ))}
             </div>
           </div>
@@ -172,7 +196,10 @@ export default function Testimonials() {
                 </div>
                 <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: '#ef4444' }}>Problem</span>
               </div>
-              <p key={`p-${active}`} style={{ fontSize: 15, fontWeight: 400, color: '#555', lineHeight: 1.8, margin: 0 }}>
+              <p key={`p-${active}`} style={{
+                fontSize: 15, fontWeight: 400, color: '#555', lineHeight: 1.8, margin: 0,
+                animation: 'fadeUp 0.4s ease forwards',
+              }}>
                 {card.problem}
               </p>
             </div>
@@ -198,7 +225,11 @@ export default function Testimonials() {
                 </div>
                 <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: '#FF4D00' }}>Solution</span>
               </div>
-              <p key={`s-${active}`} style={{ fontSize: 15, fontWeight: 400, color: '#aaa', lineHeight: 1.8, margin: 0, position: 'relative', zIndex: 1 }}>
+              <p key={`s-${active}`} style={{
+                fontSize: 15, fontWeight: 400, color: '#aaa', lineHeight: 1.8, margin: 0,
+                position: 'relative', zIndex: 1,
+                animation: 'fadeUp 0.4s ease forwards',
+              }}>
                 {card.solution}
               </p>
             </div>
@@ -219,7 +250,11 @@ export default function Testimonials() {
                 </div>
                 <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: '#FF4D00' }}>Client Review</span>
               </div>
-              <p key={`r-${active}`} style={{ fontSize: 14, fontWeight: 400, color: '#666', lineHeight: 1.85, fontStyle: 'italic', margin: 0 }}>
+              <p key={`r-${active}`} style={{
+                fontSize: 14, fontWeight: 400, color: '#666', lineHeight: 1.85,
+                fontStyle: 'italic', margin: 0,
+                animation: 'fadeUp 0.4s ease forwards',
+              }}>
                 {card.review}
               </p>
             </div>
@@ -227,6 +262,17 @@ export default function Testimonials() {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(10px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes dotFill {
+          from { transform: translateX(-100%); }
+          to   { transform: translateX(0%); }
+        }
+      `}</style>
     </section>
   )
 }
