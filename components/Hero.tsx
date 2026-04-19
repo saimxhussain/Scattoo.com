@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 const TABS = [
-  { id: 'b2b', label: 'B2B Lead Generator', tag: 'Lead Gen', src: '/b2b-lead-gen.mp4' },
-  { id: 'li', label: 'LinkedIn Scraper', tag: 'Prospecting', src: '/linkedin-scraper.gif' },
+  { id: 'b2b', label: 'B2B Lead Generator', tag: 'Lead Gen', src: 'https://res.cloudinary.com/dgh17nged/video/upload/q_auto/f_auto/v1776609526/B2B_Lead_Generator_ghhfmk.mp4' },
+  { id: 'li', label: 'LinkedIn Scraper', tag: 'Prospecting', src: 'https://res.cloudinary.com/dgh17nged/video/upload/q_auto/f_auto/v1776609527/Linkedin_scraper_qc6yxa.mp4' },
 ]
 
 const TRUSTED = ['n8n', 'OpenAI', 'Apollo.io', 'HubSpot', 'LinkedIn', 'Make.com']
