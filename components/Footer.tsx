@@ -11,7 +11,7 @@ const SM = [
 const NAV_COLS = [
   { title: 'Services', links: [{ l: 'Lead Generation', h: '#services' }, { l: 'AI Agents', h: '#services' }, { l: 'Social Automation', h: '#services' }, { l: 'Voice AI Agents', h: '#services' }, { l: 'Outreach Campaigns', h: '#services' }] },
   { title: 'Company', links: [{ l: 'About', h: '#about' }, { l: 'Process', h: '#process' }, { l: 'Case Studies', h: '#case-studies' }, { l: 'Pricing', h: '#pricing' }, { l: 'Book a Call', h: 'https://cal.com/saim-hussain-9ekrz6', ext: true }] },
-  { title: 'Contact', links: [{ l: 'saimxhussain@gmail.com', h: 'mailto:saimxhussain@gmail.com' }, { l: 'LinkedIn (Personal)', h: 'https://www.linkedin.com/in/saim-hussain-ab318b3b4/', ext: true }, { l: 'Karachi, Pakistan', h: '#' }] },
+  { title: 'Contact', links: [{ l: 'saimxhussain@gmail.com', h: 'mailto:saimxhussain@gmail.com' }, { l: 'LinkedIn (Personal)', h: 'https://www.linkedin.com/in/saim-hussain-ab318b3b4/', ext: true }, { l: 'Karachi, Pakistan', h: 'https://maps.google.com/?q=Karachi,Pakistan', ext: true }] },
 ]
 
 export default function Footer() {
@@ -64,7 +64,8 @@ export default function Footer() {
       </div>
 
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-        <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)' }}>© 2025 Scattoo. All rights reserved.</span>
+        {/* FIX: updated copyright year */}
+        <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)' }}>© 2026 Scattoo. All rights reserved.</span>
         <div style={{ display: 'flex', gap: 28, alignItems: 'center', flexWrap: 'wrap' }}>
           <Link href="/privacy-policy" style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', textDecoration: 'none', transition: 'color 0.2s' }}
             onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FF4D00'}
@@ -75,16 +76,54 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Giant brand name */}
-      <div style={{ overflow: 'hidden', paddingTop: 32 }}>
+      {/* FIX 6: Attractive animated SCATTOO with glow + gradient stroke */}
+      <div style={{ overflow: 'hidden', paddingTop: 24, paddingBottom: 0, position: 'relative' }}>
+        {/* Glow beneath text */}
         <div style={{
-          fontFamily: 'EquitanSans, sans-serif', fontWeight: 900,
+          position: 'absolute',
+          bottom: 0, left: '50%',
+          transform: 'translateX(-50%)',
+          width: '70%', height: 80,
+          background: 'radial-gradient(ellipse, rgba(255,77,0,0.18) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }} />
+        <div className="footer-brand" style={{
+          fontFamily: 'EquitanSans, sans-serif',
+          fontWeight: 900,
           fontSize: 'clamp(80px, 18vw, 240px)',
-          lineHeight: 0.85, letterSpacing: -6,
-          color: 'rgba(255,255,255,0.04)',
-          textAlign: 'center', userSelect: 'none', paddingBottom: 0,
+          lineHeight: 0.85,
+          letterSpacing: -6,
+          textAlign: 'center',
+          userSelect: 'none',
+          paddingBottom: 0,
+          // FIX 6: gradient text instead of flat near-invisible color
+          background: 'linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,77,0,0.12) 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          animation: 'brandGlow 4s ease-in-out infinite alternate',
         }}>SCATTOO</div>
       </div>
+
+      <style>{`
+        @keyframes brandGlow {
+          from {
+            background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,77,0,0.10) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            filter: none;
+          }
+          to {
+            background: linear-gradient(180deg, rgba(255,255,255,0.13) 0%, rgba(255,77,0,0.25) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            filter: drop-shadow(0 0 40px rgba(255,77,0,0.25));
+          }
+        }
+        .footer-brand {
+          animation: brandGlow 4s ease-in-out infinite alternate;
+        }
+      `}</style>
     </footer>
   )
 }
