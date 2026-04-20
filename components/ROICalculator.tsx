@@ -105,12 +105,12 @@ export default function ROICalculator() {
               <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#FF4D00' }}>ROI Calculator</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, marginBottom: 12 }}>
-              <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: '#fff', margin: 0 }}>
+              <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: 'var(--text)', margin: 0 }}>
                 See what manual work<br /><span style={{ color: '#FF4D00' }}>is costing you.</span>
               </h2>
 
             </div>
-            <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.45)', marginBottom: 56, lineHeight: 1.7 }}>Adjust the sliders. The numbers might surprise you.</p>
+            <p style={{ fontSize: 16, color: 'var(--text-4)', marginBottom: 56, lineHeight: 1.7 }}>Adjust the sliders. The numbers might surprise you.</p>
           </Reveal>
 
           <div className="roi-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start' }}>
@@ -119,36 +119,36 @@ export default function ROICalculator() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
 
               {/* Hours */}
-              <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '28px 28px' }}>
+              <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '28px 28px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-                  <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 15, color: '#fff' }}>Hours/week on manual tasks</span>
+                  <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 15, color: 'var(--text)' }}>Hours/week on manual tasks</span>
                   <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 28, color: '#FF4D00', letterSpacing: -1 }}>{hours}h</span>
                 </div>
                 <input type="range" min={1} max={60} value={hours} onChange={e => setHours(Number(e.target.value))}
                   style={{ width: '100%', accentColor: '#FF4D00', cursor: 'pointer', height: 4 }} />
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8 }}>
-                  <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)' }}>1h</span>
-                  <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)' }}>60h</span>
+                  <span style={{ fontSize: 11, color: 'var(--text-6)' }}>1h</span>
+                  <span style={{ fontSize: 11, color: 'var(--text-6)' }}>60h</span>
                 </div>
               </div>
 
               {/* Rate */}
-              <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '28px 28px' }}>
+              <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '28px 28px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-                  <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 15, color: '#fff' }}>Your hourly rate / value</span>
+                  <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 15, color: 'var(--text)' }}>Your hourly rate / value</span>
                   <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 28, color: '#FF4D00', letterSpacing: -1 }}>{s}{rate}/h</span>
                 </div>
                 <input type="range" min={country.min} max={country.max} step={country.step} value={rate} onChange={e => setRate(Number(e.target.value))}
                   style={{ width: '100%', accentColor: '#FF4D00', cursor: 'pointer', height: 4 }} />
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8 }}>
-                  <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)' }}>{s}{country.min}</span>
-                  <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)' }}>{fmt(s, country.max)}</span>
+                  <span style={{ fontSize: 11, color: 'var(--text-6)' }}>{s}{country.min}</span>
+                  <span style={{ fontSize: 11, color: 'var(--text-6)' }}>{fmt(s, country.max)}</span>
                 </div>
               </div>
 
               {/* Tasks */}
-              <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '28px 28px' }}>
-                <p style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 15, color: '#fff', marginBottom: 16 }}>What are you automating?</p>
+              <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '28px 28px' }}>
+                <p style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 15, color: 'var(--text)', marginBottom: 16 }}>What are you automating?</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {tasks.map(t => (
                     <div key={t.id} onClick={() => toggle(t.id)} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', borderRadius: 10, cursor: 'pointer', background: selected.includes(t.id) ? 'rgba(255,77,0,0.10)' : 'rgba(255,255,255,0.03)', border: `1px solid ${selected.includes(t.id) ? 'rgba(255,77,0,0.35)' : 'rgba(255,255,255,0.07)'}`, transition: 'all 0.2s' }}>
@@ -157,7 +157,7 @@ export default function ROICalculator() {
                       </div>
                       <div style={{ flex: 1 }}>
                         <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: selected.includes(t.id) ? '#fff' : 'rgba(255,255,255,0.6)' }}>{t.label}</p>
-                        <p style={{ margin: 0, fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>{t.desc}</p>
+                        <p style={{ margin: 0, fontSize: 11, color: 'var(--text-5)' }}>{t.desc}</p>
                       </div>
                       <div style={{ width: 20, height: 20, borderRadius: 6, flexShrink: 0, background: selected.includes(t.id) ? '#FF4D00' : 'transparent', border: `2px solid ${selected.includes(t.id) ? '#FF4D00' : 'rgba(255,255,255,0.2)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s' }}>
                         {selected.includes(t.id) && <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>}
@@ -173,14 +173,14 @@ export default function ROICalculator() {
               <div style={{ background: 'linear-gradient(135deg, rgba(255,77,0,0.15), rgba(255,77,0,0.05))', border: '1px solid rgba(255,77,0,0.3)', borderRadius: 20, padding: '40px 36px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', top: -60, right: -60, width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,77,0,0.2) 0%, transparent 70%)', pointerEvents: 'none' }} />
                 <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'rgba(255,77,0,0.8)', marginBottom: 12 }}>You&apos;re losing per year</p>
-                <p style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(48px, 7vw, 72px)', color: '#fff', letterSpacing: -3, lineHeight: 1, margin: '0 0 8px' }}>
+                <p style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(48px, 7vw, 72px)', color: 'var(--text)', letterSpacing: -3, lineHeight: 1, margin: '0 0 8px' }}>
                   {fmt(s, yearly)}
                 </p>
-                <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', margin: 0 }}>in time spent on tasks AI can handle</p>
+                <p style={{ fontSize: 14, color: 'var(--text-muted)', margin: 0 }}>in time spent on tasks AI can handle</p>
               </div>
 
-              <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '28px 28px' }}>
-                <p style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 13, letterSpacing: 2, textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 20 }}>Breakdown</p>
+              <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '28px 28px' }}>
+                <p style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 13, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--text-5)', marginBottom: 20 }}>Breakdown</p>
                 {[
                   { label: 'Wasted per week',        val: fmt(s, weekly) },
                   { label: 'Wasted per month',        val: fmt(s, monthly) },
@@ -188,20 +188,20 @@ export default function ROICalculator() {
                   { label: 'Value recovered/year',    val: fmt(s, saved), highlight: true },
                 ].map((row, i) => (
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: i < 3 ? '1px solid rgba(255,255,255,0.06)' : 'none' }}>
-                    <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}>{row.label}</span>
+                    <span style={{ fontSize: 14, color: 'var(--text-3)' }}>{row.label}</span>
                     <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 800, fontSize: 18, color: row.highlight ? '#FF4D00' : '#fff', letterSpacing: -0.5 }}>{row.val}</span>
                   </div>
                 ))}
               </div>
 
               <a href="https://cal.com/saim-hussain-9ekrz6" target="_blank" rel="noreferrer"
-                style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 13, letterSpacing: 1, textTransform: 'uppercase', background: 'linear-gradient(135deg, #FF4D00, #ff7733)', color: '#fff', padding: '18px 32px', textDecoration: 'none', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 8px 32px rgba(255,77,0,0.4)', transition: 'all 0.2s' }}
+                style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 13, letterSpacing: 1, textTransform: 'uppercase', background: 'linear-gradient(135deg, #FF4D00, #ff7733)', color: 'var(--text)', padding: '18px 32px', textDecoration: 'none', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 8px 32px rgba(255,77,0,0.4)', transition: 'all 0.2s' }}
                 onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-2px)'; el.style.boxShadow = '0 16px 48px rgba(255,77,0,0.6)' }}
                 onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = '0 8px 32px rgba(255,77,0,0.4)' }}
               >
                 Recover {fmt(s, saved)} — Book a Free Call →
               </a>
-              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', textAlign: 'center', margin: 0 }}>Assumes 85% automation rate. No commitment required.</p>
+              <p style={{ fontSize: 12, color: 'var(--text-6)', textAlign: 'center', margin: 0 }}>Assumes 85% automation rate. No commitment required.</p>
             </div>
           </div>
         </div>
