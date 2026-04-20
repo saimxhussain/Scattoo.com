@@ -64,16 +64,13 @@ export default function ROICalculator() {
   const [country,  setCountry]  = useState(COUNTRIES[0])
   const [rate,     setRate]     = useState(COUNTRIES[0].defaultRate)
   const [selected, setSelected] = useState<string[]>(['leadgen', 'outreach'])
-  const [showModal, setShowModal] = useState(false)
-  const [search,   setSearch]   = useState('')
 
   useEffect(() => {
     const saved = localStorage.getItem('agentflow_country')
     if (saved) {
       const found = COUNTRIES.find(c => c.code === saved)
-      if (found) { setCountry(found); setRate(found.defaultRate); return }
+      if (found) { setCountry(found); setRate(found.defaultRate) }
     }
-    setShowModal(true)
   }, [])
 
   // All math in local currency — no conversion needed
@@ -89,55 +86,15 @@ export default function ROICalculator() {
   const selectCountry = (c: typeof COUNTRIES[0]) => {
     setCountry(c)
     setRate(c.defaultRate)
-    setShowModal(false)
     localStorage.setItem("agentflow_country", c.code)
   }
 
-  const filtered = COUNTRIES.filter(c =>
-    c.name.toLowerCase().includes(search.toLowerCase()) ||
-    c.symbol.toLowerCase().includes(search.toLowerCase())
-  )
 
   const s = country.symbol
 
   return (
     <>
-      {/* Country Modal */}
-      {showModal && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 99999, background: 'rgba(8,8,16,0.92)', backdropFilter: 'blur(24px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
-          <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 24, padding: '40px 36px', maxWidth: 460, width: '100%', boxShadow: '0 32px 80px rgba(0,0,0,0.6)' }}>
-            <div style={{ textAlign: 'center', marginBottom: 28 }}>
-              <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 52, height: 52, borderRadius: 14, background: 'rgba(255,77,0,0.12)', border: '1px solid rgba(255,77,0,0.25)', marginBottom: 18 }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF4D00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                </svg>
-              </div>
-              <h3 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 26, color: '#fff', letterSpacing: -1, margin: '0 0 8px' }}>Where are you based?</h3>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', margin: 0 }}>We&apos;ll show your ROI in your local currency.</p>
-            </div>
-            <div style={{ position: 'relative', marginBottom: 10 }}>
-              <svg style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              </svg>
-              <input type="text" placeholder="Search country..." value={search} onChange={e => setSearch(e.target.value)}
-                style={{ width: '100%', padding: '11px 14px 11px 40px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 10, color: '#fff', fontSize: 14, outline: 'none', boxSizing: 'border-box' }} />
-            </div>
-            <div style={{ maxHeight: 280, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 3 }}>
-              {filtered.map(c => (
-                <div key={c.code} onClick={() => selectCountry(c)}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '11px 16px', borderRadius: 10, cursor: 'pointer', background: country.code === c.code ? 'rgba(255,77,0,0.12)' : 'rgba(255,255,255,0.03)', border: `1px solid ${country.code === c.code ? 'rgba(255,77,0,0.35)' : 'rgba(255,255,255,0.06)'}`, transition: 'all 0.15s' }}
-                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(255,77,0,0.08)'; el.style.borderColor = 'rgba(255,77,0,0.2)' }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = country.code === c.code ? 'rgba(255,77,0,0.12)' : 'rgba(255,255,255,0.03)'; el.style.borderColor = country.code === c.code ? 'rgba(255,77,0,0.35)' : 'rgba(255,255,255,0.06)' }}
-                >
-                  <span style={{ fontSize: 14, fontWeight: 600, color: '#fff' }}>{c.name}</span>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: '#FF4D00', background: 'rgba(255,77,0,0.10)', padding: '3px 10px', borderRadius: 6 }}>{c.symbol}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+
 
       <section id="roi-calculator" style={{ padding: '120px 0', borderBottom: '1px solid rgba(255,255,255,0.06)', position: 'relative', overflow: 'hidden' }}>
         <div className="orb" style={{ width: 500, height: 500, background: 'rgba(255,77,0,0.07)', top: -100, left: '30%', animation: 'orbMove 20s ease-in-out infinite' }} />
@@ -151,18 +108,7 @@ export default function ROICalculator() {
               <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: '#fff', margin: 0 }}>
                 See what manual work<br /><span style={{ color: '#FF4D00' }}>is costing you.</span>
               </h2>
-              <button onClick={() => { setSearch(''); setShowModal(true) }}
-                style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'rgba(255,77,0,0.10)', border: '1px solid rgba(255,77,0,0.3)', borderRadius: 10, padding: '10px 16px', cursor: 'pointer', transition: 'all 0.2s', marginBottom: 4 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,77,0,0.18)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,77,0,0.10)' }}
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF4D00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                </svg>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#FF4D00' }}>{country.name} · {s}</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FF4D00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
+
             </div>
             <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.45)', marginBottom: 56, lineHeight: 1.7 }}>Adjust the sliders. The numbers might surprise you.</p>
           </Reveal>
