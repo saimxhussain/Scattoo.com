@@ -25,26 +25,26 @@ const icons: Record<string, React.ReactNode> = {
 
 export default function Services() {
   return (
-    <section id="services" style={{ padding: '120px 0', borderBottom: '1px solid rgba(255,255,255,0.06)', position: 'relative', overflow: 'hidden' }}>
+    <section id="services" style={{ padding: '120px 0', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}>
       <div className="orb" style={{ width: 500, height: 500, background: 'rgba(255,77,0,0.06)', top: -150, right: -150, animation: 'orbMove 18s ease-in-out infinite' }} />
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
         <Reveal>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-            <span style={{ width: 24, height: 3, background: '#FF4D00', borderRadius: 2 }} />
-            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#FF4D00' }}>Services / Capabilities</span>
+            <span style={{ width: 24, height: 3, background: 'var(--orange)', borderRadius: 2 }} />
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--orange)' }}>Services / Capabilities</span>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 60, flexWrap: 'wrap', gap: 20 }}>
-            <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: '#fff' }}>
-              What we deploy<br /><span style={{ color: '#FF4D00' }}>for you.</span>
+            <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: 'var(--text)' }}>
+              What we deploy<br /><span style={{ color: 'var(--orange)' }}>for you.</span>
             </h2>
             <a href="https://cal.com/saim-hussain-9ekrz6" target="_blank" rel="noreferrer" style={{
               fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 12, letterSpacing: 1,
-              textTransform: 'uppercase', background: 'rgba(255,255,255,0.08)', color: '#fff', padding: '13px 26px',
+              textTransform: 'uppercase', background: 'var(--surface-2)', color: 'var(--text)', padding: '13px 26px',
               textDecoration: 'none', borderRadius: 8, transition: 'all 0.2s', flexShrink: 0,
-              border: '1px solid rgba(255,255,255,0.15)', backdropFilter: 'blur(12px)',
+              border: '1px solid var(--border-2)', backdropFilter: 'blur(12px)',
             }}
-              onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = '#FF4D00'; el.style.borderColor = '#FF4D00'; el.style.transform = 'translateY(-1px)' }}
-              onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(255,255,255,0.08)'; el.style.borderColor = 'rgba(255,255,255,0.15)'; el.style.transform = 'translateY(0)' }}
+              onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'var(--orange)'; el.style.borderColor = 'var(--orange)'; el.style.color = '#fff'; el.style.transform = 'translateY(-1px)' }}
+              onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'var(--surface-2)'; el.style.borderColor = 'var(--border-2)'; el.style.color = 'var(--text)'; el.style.transform = 'translateY(0)' }}
             >Get a Custom Quote →</a>
           </div>
         </Reveal>
@@ -53,20 +53,19 @@ export default function Services() {
           {svcs.map((s, i) => (
             <Reveal key={i} delay={i * 40}>
               <div style={{
-                background: 'rgba(255,255,255,0.04)',
-                backdropFilter: 'blur(24px)',
-                WebkitBackdropFilter: 'blur(24px)',
+                background: 'var(--surface)',
+                backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
                 padding: '32px 26px', borderRadius: 12,
-                border: '1px solid rgba(255,255,255,0.08)', transition: 'all 0.25s', cursor: 'default',
+                border: '1px solid var(--border)', transition: 'all 0.25s', cursor: 'default',
                 height: '100%', boxSizing: 'border-box' as const,
               }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,77,0,0.5)'; el.style.transform = 'translateY(-4px)'; el.style.background = 'rgba(255,77,0,0.06)'; el.style.boxShadow = '0 12px 40px rgba(255,77,0,0.12)' }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,255,255,0.08)'; el.style.transform = 'translateY(0)'; el.style.background = 'rgba(255,255,255,0.04)'; el.style.boxShadow = 'none' }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,77,0,0.5)'; el.style.transform = 'translateY(-4px)'; el.style.background = 'var(--orange-surface)'; el.style.boxShadow = '0 12px 40px rgba(255,77,0,0.12)' }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border)'; el.style.transform = 'translateY(0)'; el.style.background = 'var(--surface)'; el.style.boxShadow = 'none' }}
               >
-                <div style={{ color: '#FF4D00', marginBottom: 16, display: 'flex' }}>{icons[s.tag]}</div>
-                <div style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: 2, color: 'rgba(255,255,255,0.2)', marginBottom: 10 }}>{s.tag}</div>
-                <h3 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 16, color: '#fff', marginBottom: 12, lineHeight: 1.3 }}>{s.title}</h3>
-                <p style={{ fontSize: 13, fontWeight: 400, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7 }}>{s.desc}</p>
+                <div style={{ color: 'var(--orange)', marginBottom: 16, display: 'flex' }}>{icons[s.tag]}</div>
+                <div style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: 2, color: 'var(--text-5)', marginBottom: 10 }}>{s.tag}</div>
+                <h3 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 16, color: 'var(--text)', marginBottom: 12, lineHeight: 1.3 }}>{s.title}</h3>
+                <p style={{ fontSize: 13, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.7 }}>{s.desc}</p>
               </div>
             </Reveal>
           ))}
