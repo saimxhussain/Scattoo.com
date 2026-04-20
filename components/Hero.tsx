@@ -152,7 +152,7 @@ export default function Hero() {
                 <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ffbd2e' }} />
                 <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#28ca41' }} />
                 <div style={{ flex: 1, background: 'rgba(255,255,255,0.07)', borderRadius: 6, padding: '4px 12px', marginLeft: 8 }}>
-                  <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', fontFamily: 'monospace' }}>app.scattoo.ai / {TABS[displayed].tag.toLowerCase().replace(' ', '-')}</span>
+                  <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', fontFamily: 'monospace' }}>app.agentflow.ai / {TABS[displayed].tag.toLowerCase().replace(' ', '-')}</span>
                 </div>
               </div>
               <div style={{ opacity: animating ? 0 : 1, transform: animating ? 'translateY(8px)' : 'translateY(0)', transition: 'opacity 0.22s ease, transform 0.22s ease' }}>
