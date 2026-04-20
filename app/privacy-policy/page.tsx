@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 const sections = [
   {
     num: '01', title: 'Introduction',
-    content: `Welcome to Scattoo ("Scattoo", "we", "us", or "our"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.\n\nPlease read this policy carefully. If you disagree with its terms, please discontinue use of our site. This policy complies with the General Data Protection Regulation (GDPR), the UK GDPR, and other applicable data protection laws.`,
+    content: `Welcome to AgentFlow ("AgentFlow", "we", "us", or "our"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.\n\nPlease read this policy carefully. If you disagree with its terms, please discontinue use of our site. This policy complies with the General Data Protection Regulation (GDPR), the UK GDPR, and other applicable data protection laws.`,
   },
   {
     num: '02', title: 'Information We Collect',
@@ -81,9 +81,9 @@ export default function PrivacyPolicy() {
       }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', height: 68, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-            <Image src="/logo.png" alt="Scattoo" width={34} height={34} style={{ borderRadius: 6 }} />
+            <Image src="/logo.png" alt="AgentFlow" width={34} height={34} style={{ borderRadius: 6 }} />
             <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 18, letterSpacing: 2, color: '#0a0a0a' }}>
-              SCATTOO<span style={{ color: '#FF4D00' }}>.</span>
+              AGENTFLOW<span style={{ color: '#FF4D00' }}>.</span>
             </span>
           </Link>
           <Link href="/" style={{
@@ -184,9 +184,9 @@ export default function PrivacyPolicy() {
 
               {s.contact && (
                 <div style={{ background: '#fafafa', borderRadius: 14, padding: '28px 28px', border: '1.5px solid #f0f0f0', marginTop: 8 }}>
-                  <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 18, color: '#0a0a0a', marginBottom: 4 }}>Scattoo</div>
+                  <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 18, color: '#0a0a0a', marginBottom: 4 }}>AgentFlow</div>
                   <a href="mailto:saimxhussain@gmail.com" style={{ fontSize: 14, color: '#FF4D00', textDecoration: 'none', display: 'block', marginBottom: 4 }}>saimxhussain@gmail.com</a>
-                  <a href="/" style={{ fontSize: 14, color: '#999', textDecoration: 'none' }}>scattoo.ai</a>
+                  <a href="/" style={{ fontSize: 14, color: '#999', textDecoration: 'none' }}>agentflow.ai</a>
                 </div>
               )}
             </div>
@@ -194,7 +194,7 @@ export default function PrivacyPolicy() {
 
           {/* Footer note */}
           <div style={{ marginTop: 48, padding: '24px', background: '#f8f8f8', borderRadius: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-            <span style={{ fontSize: 12, color: '#aaa' }}>© 2025 Scattoo — All rights reserved</span>
+            <span style={{ fontSize: 12, color: '#aaa' }}>© 2025 AgentFlow — All rights reserved</span>
             <Link href="/" style={{ fontSize: 12, color: '#FF4D00', textDecoration: 'none', fontWeight: 600 }}>← Back to Home</Link>
           </div>
         </div>
