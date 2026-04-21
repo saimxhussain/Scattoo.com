@@ -1,5 +1,4 @@
 'use client'
-import { useEffect, useRef } from 'react'
 
 const steps = [
   {
@@ -25,187 +24,62 @@ const steps = [
   },
 ]
 
-function SlideCard({ s, i }: { s: typeof steps[0]; i: number }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isRight = i % 2 !== 0
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    // slide in from left or right depending on position
-    el.style.opacity = '0'
-    el.style.transform = isRight ? 'translateX(60px)' : 'translateX(-60px)'
-    el.style.transition = `opacity 0.8s ${i * 160}ms ease, transform 0.8s ${i * 160}ms ease`
-
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) {
-        el.style.opacity = '1'
-        el.style.transform = 'translateX(0)'
-        obs.disconnect()
-      }
-    }, { threshold: 0.12 })
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [i, isRight])
-
-  return (
-    <div
-      ref={ref}
-      className="process-card"
-      style={{
-        width: '44%',
-        background: 'var(--surface)',
-        border: '1px solid var(--border-2)',
-        borderRadius: 20,
-        overflow: 'hidden',
-        backdropFilter: 'blur(16px)',
-        boxShadow: '0 4px 40px rgba(0,0,0,0.18)',
-      }}
-    >
-      {/* Top accent bar */}
-      <div style={{
-        height: 3,
-        background: 'linear-gradient(90deg, var(--orange), var(--orange-subtle))',
-      }} />
-
-      {/* Header */}
-      <div style={{
-        padding: '28px 32px 24px',
-        background: 'var(--surface-3)',
-        borderBottom: '1px solid var(--border)',
-        display: 'flex',
-        alignItems: 'flex-start',
-        gap: 20,
-      }}>
-        <div style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: '52px',
-          color: 'var(--text-6)',
-          lineHeight: 1,
-          flexShrink: 0,
-          marginTop: 2,
-        }}>
-          {s.num}
-        </div>
-        <div>
-          <h3 style={{
-            fontSize: '20px',
-            color: 'var(--text)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            margin: '0 0 6px',
-            fontWeight: 700,
-            fontFamily: 'var(--font-heading)',
-          }}>
-            {s.title}
-          </h3>
-          <p style={{
-            fontSize: 13,
-            color: 'var(--orange)',
-            margin: 0,
-            fontWeight: 500,
-            letterSpacing: '0.02em',
-          }}>
-            {s.sub}
-          </p>
-        </div>
-      </div>
-
-      {/* Body */}
-      <div style={{ padding: '28px 32px 32px' }}>
-        <p style={{
-          color: 'var(--text-3)',
-          lineHeight: 1.7,
-          marginBottom: 24,
-          fontSize: 14,
-        }}>
-          {s.desc}
-        </p>
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          {s.tags.map((tag, j) => (
-            <span
-              key={j}
-              style={{
-                fontSize: 10,
-                fontWeight: 700,
-                color: 'var(--orange)',
-                background: 'var(--orange-surface)',
-                padding: '5px 12px',
-                borderRadius: 4,
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em',
-                border: '1px solid var(--orange-subtle)',
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export default function Process() {
-  const headerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const el = headerRef.current
-    if (!el) return
-    el.style.opacity = '0'
-    el.style.transform = 'translateY(32px)'
-    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease'
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; obs.disconnect() }
-    }, { threshold: 0.2 })
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [])
-
   return (
     <section
       id="process"
       style={{
         padding: '140px 0',
-        background: 'var(--bg)',
+        background: 'linear-gradient(180deg, #0a0a0a 0%, #111 40%, #0d0d0d 100%)',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Orb background glow — same pattern as other sections */}
-      <div className="orb" style={{
-        width: 500,
-        height: 500,
-        background: 'rgba(131,199,50,0.05)',
-        top: '10%',
+      {/* Subtle grid texture overlay */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        backgroundImage: `
+          linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)
+        `,
+        backgroundSize: '60px 60px',
+        pointerEvents: 'none',
+      }} />
+
+      {/* Radial glow in center */}
+      <div style={{
+        position: 'absolute',
         left: '50%',
-        transform: 'translateX(-50%)',
-        animation: 'orbMove 20s ease-in-out infinite',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '600px',
+        height: '600px',
+        background: 'radial-gradient(circle, rgba(131,199,50,0.04) 0%, transparent 70%)',
+        pointerEvents: 'none',
       }} />
 
       <div style={{ maxWidth: 1300, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 2 }}>
 
         {/* Section header */}
-        <div ref={headerRef} style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 16 }}>
-            <span style={{ width: 24, height: 3, background: 'var(--orange)', borderRadius: 2, display: 'inline-block' }} />
-            <span style={{
-              fontSize: 11,
-              fontWeight: 700,
-              letterSpacing: '0.2em',
-              color: 'var(--orange)',
-              textTransform: 'uppercase',
-            }}>
-              How it works
-            </span>
-          </div>
+        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+          <span style={{
+            fontSize: 11,
+            fontWeight: 700,
+            letterSpacing: '0.2em',
+            color: '#83C732',
+            textTransform: 'uppercase',
+            display: 'block',
+            marginBottom: 16,
+          }}>
+            How it works
+          </span>
           <h2 style={{
             fontSize: 'clamp(32px, 4vw, 52px)',
-            color: 'var(--text)',
+            color: '#fff',
             fontWeight: 700,
             letterSpacing: '-0.02em',
             margin: 0,
-            fontFamily: 'var(--font-display)',
           }}>
             Three steps to autopilot
           </h2>
@@ -218,7 +92,7 @@ export default function Process() {
           top: '200px',
           bottom: '60px',
           width: '1px',
-          background: 'linear-gradient(to bottom, transparent, var(--section-line) 10%, var(--section-line) 90%, transparent)',
+          background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.12) 10%, rgba(255,255,255,0.12) 90%, transparent)',
           transform: 'translateX(-50%)',
           zIndex: 1,
         }} />
@@ -244,14 +118,106 @@ export default function Process() {
                   transform: 'translate(-50%, -50%)',
                   width: '16px',
                   height: '16px',
-                  background: '#ff4d4d',
+                  background: '#83C732',
                   borderRadius: '50%',
-                  boxShadow: '0 0 20px 6px rgba(255, 77, 77, 0.35)',
-                  border: '3px solid var(--bg)',
+                  boxShadow: '0 0 20px 6px rgba(131, 199, 50, 0.45)',
+                  border: '3px solid #0d0d0d',
                   zIndex: 5,
                 }} />
 
-                <SlideCard s={s} i={i} />
+                {/* CARD */}
+                <div
+                  className="process-card"
+                  style={{
+                    width: '44%',
+                    background: 'rgba(20, 20, 20, 0.9)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    borderRadius: 20,
+                    overflow: 'hidden',
+                    backdropFilter: 'blur(16px)',
+                    boxShadow: '0 4px 40px rgba(0,0,0,0.5)',
+                  }}
+                >
+                  {/* Top accent bar */}
+                  <div style={{
+                    height: 3,
+                    background: 'linear-gradient(90deg, #83C732, rgba(131,199,50,0.2))',
+                  }} />
+
+                  {/* Header */}
+                  <div style={{
+                    padding: '28px 32px 24px',
+                    background: 'rgba(255,255,255,0.02)',
+                    borderBottom: '1px solid rgba(255,255,255,0.06)',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: 20,
+                  }}>
+                    <div style={{
+                      fontFamily: 'serif',
+                      fontSize: '52px',
+                      color: 'rgba(255,255,255,0.06)',
+                      lineHeight: 1,
+                      flexShrink: 0,
+                      marginTop: 2,
+                    }}>
+                      {s.num}
+                    </div>
+                    <div>
+                      <h3 style={{
+                        fontSize: '20px',
+                        color: '#fff',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em',
+                        margin: '0 0 6px',
+                        fontWeight: 700,
+                      }}>
+                        {s.title}
+                      </h3>
+                      <p style={{
+                        fontSize: 13,
+                        color: '#83C732',
+                        margin: 0,
+                        fontWeight: 500,
+                        letterSpacing: '0.02em',
+                      }}>
+                        {s.sub}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Body */}
+                  <div style={{ padding: '28px 32px 32px' }}>
+                    <p style={{
+                      color: '#999',
+                      lineHeight: 1.7,
+                      marginBottom: 24,
+                      fontSize: 14,
+                    }}>
+                      {s.desc}
+                    </p>
+                    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                      {s.tags.map((tag, j) => (
+                        <span
+                          key={j}
+                          style={{
+                            fontSize: 10,
+                            fontWeight: 700,
+                            color: '#83C732',
+                            background: 'rgba(131,199,50,0.08)',
+                            padding: '5px 12px',
+                            borderRadius: 4,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.1em',
+                            border: '1px solid rgba(131,199,50,0.2)',
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             )
           })}
