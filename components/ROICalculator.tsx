@@ -57,7 +57,7 @@ export default function ROICalculator() {
   }
 
   return (
-    <section id="roi-calculator" style={{ padding: '100px 0', borderBottom: '1px solid rgba(255,255,255,0.06)', position: 'relative', overflow: 'hidden' }}>
+    <section id="roi-calculator" style={{ padding: '72px 0', borderBottom: '1px solid rgba(255,255,255,0.06)', position: 'relative', overflow: 'hidden' }}>
       <div className="orb" style={{ width: 500, height: 500, background: 'rgba(131,199,50,0.07)', top: -100, left: '30%', animation: 'orbMove 20s ease-in-out infinite' }} />
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
         <Reveal>
@@ -65,7 +65,7 @@ export default function ROICalculator() {
             <span style={{ width: 24, height: 3, background: '#83C732', borderRadius: 2 }} />
             <span style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 12, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#83C732' }}>ROI Calculator</span>
           </div>
-          <h2 style={{ fontFamily: 'var(--font-display), MonumentExtended, sans-serif', fontSize: 'clamp(44px, 5.5vw, 72px)', lineHeight: 1.0, letterSpacing: 1, color: 'var(--text)', marginBottom: 8 }}>
+          <h2 style={{ fontFamily: 'var(--font-display), MonumentExtended, sans-serif', fontSize: 'clamp(28px, 3.5vw, 48px)', lineHeight: 1.0, letterSpacing: 1, color: 'var(--text)', marginBottom: 8 }}>
             See what manual work <span style={{ color: '#83C732' }}>is costing you.</span>
           </h2>
           <p style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 17, color: 'var(--text-4)', marginBottom: 40, lineHeight: 1.6 }}>Adjust the sliders. The numbers might surprise you.</p>
@@ -118,9 +118,9 @@ export default function ROICalculator() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <div style={{ background: 'linear-gradient(135deg, rgba(131,199,50,0.15), rgba(131,199,50,0.05))', border: '1px solid rgba(131,199,50,0.3)', borderRadius: 20, padding: '36px 32px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', top: -60, right: -60, width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(131,199,50,0.2) 0%, transparent 70%)', pointerEvents: 'none' }} />
-              <p style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'rgba(131,199,50,0.8)', marginBottom: 12 }}>You&apos;re losing per year</p>
-              <p style={{ fontFamily: 'var(--font-display), MonumentExtended, sans-serif', fontSize: 'clamp(56px, 8vw, 80px)', color: 'var(--text)', letterSpacing: 1, lineHeight: 1, margin: '0 0 8px' }}>
-                {fmt(s, yearly)}
+              <p style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'rgba(131,199,50,0.8)', marginBottom: 12 }}>You&apos;re losing per month</p>
+              <p style={{ fontFamily: 'var(--font-display), MonumentExtended, sans-serif', fontSize: 'clamp(48px, 7vw, 72px)', color: 'var(--text)', letterSpacing: 1, lineHeight: 1, margin: '0 0 8px' }}>
+                {fmt(s, monthly)}
               </p>
               <p style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 15, color: 'var(--text-muted)', margin: 0 }}>in time spent on tasks AI can handle</p>
             </div>
@@ -128,10 +128,9 @@ export default function ROICalculator() {
             <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '24px 28px' }}>
               <p style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontWeight: 700, fontSize: 12, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--text-5)', marginBottom: 18 }}>Breakdown</p>
               {[
-                { label: 'Wasted per week',        val: fmt(s, weekly) },
-                { label: 'Wasted per month',        val: fmt(s, monthly) },
-                { label: 'Hours automatable/week',  val: `${automatable}h` },
-                { label: 'Value recovered/year',    val: fmt(s, saved), highlight: true },
+                { label: 'Wasted per week',       val: fmt(s, weekly) },
+                { label: 'Hours automatable/week', val: `${automatable}h` },
+                { label: 'Value recovered/month',  val: fmt(s, Math.round(saved / 12)), highlight: true },
               ].map((row, i) => (
                 <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '11px 0', borderBottom: i < 3 ? '1px solid rgba(255,255,255,0.06)' : 'none' }}>
                   <span style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 15, color: 'var(--text-3)' }}>{row.label}</span>
@@ -145,9 +144,9 @@ export default function ROICalculator() {
               onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-2px)'; el.style.boxShadow = '0 16px 48px rgba(131,199,50,0.6)' }}
               onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = '0 8px 32px rgba(131,199,50,0.4)' }}
             >
-              Recover {fmt(s, saved)} — Book a Free Call →
+              Recover {fmt(s, Math.round(saved / 12))}/mo — Book a Free Call →
             </a>
-            <p style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 12, color: 'var(--text-6)', textAlign: 'center', margin: 0 }}>Assumes 85% automation rate. No commitment required.</p>
+            <p style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 12, color: 'var(--text-6)', textAlign: 'center', margin: 0 }}>Assumes 85% automation rate. Monthly estimate. No commitment required.</p>
           </div>
         </div>
       </div>
