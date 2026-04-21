@@ -22,8 +22,8 @@ function LiquidText() {
       <span style={{
         fontFamily: 'var(--font-display), MonumentExtended, sans-serif',
         fontWeight: 800,
-        fontSize: 'clamp(34px, 4.8vw, 96px)',
-        letterSpacing: '0.08em',
+        fontSize: 'clamp(42px, 7.5vw, 120px)',
+        letterSpacing: '0.05em',
         lineHeight: 1,
         whiteSpace: 'nowrap',
         display: 'block',
@@ -87,7 +87,7 @@ export default function Hero() {
         WebkitBackdropFilter: 'blur(20px) saturate(160%)',
         border: '1px solid rgba(255,255,255,0.18)',
         borderRadius: 32,
-        padding: '48px 48px 44px',
+        padding: '40px 48px 32px',
         boxShadow: '0 8px 48px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.15)',
       }}>
 
@@ -124,7 +124,7 @@ export default function Hero() {
         </p>
 
         {/* 3 pill buttons */}
-        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 44 }}>
+        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 28 }}>
           {[
             { label: 'Book a Free Consultation', href: 'https://cal.com/saim-hussain-9ekrz6', primary: true },
             { label: 'Our Services', href: '#services', primary: false },
