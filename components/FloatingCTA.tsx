@@ -19,7 +19,7 @@ export default function FloatingCTA() {
         position: 'fixed',
         bottom: 28, right: 28,
         zIndex: 199,
-        fontFamily: 'EquitanSans, sans-serif',
+        fontFamily: 'var(--font-heading), Michroma, sans-serif',
         fontWeight: 700, fontSize: 12, letterSpacing: 1,
         textTransform: 'uppercase',
         background: 'linear-gradient(135deg, #83C732, #7A9137)',

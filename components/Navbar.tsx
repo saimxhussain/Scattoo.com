@@ -114,7 +114,7 @@ export default function Navbar() {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', height: 68, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
             <Image src="/logo.png" alt="AgentFlow" width={36} height={36} style={{ borderRadius: 8 }} />
-            <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 20, letterSpacing: 2, color: '#fff' }}>
+            <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 20, letterSpacing: 2, color: '#fff' }}>
               AGENTFLOW<span style={{ color: '#83C732' }}>.</span>
             </span>
           </a>
@@ -124,7 +124,7 @@ export default function Navbar() {
             {NAV.map(n => (
               <li key={n.label}>
                 <a href={n.href} style={{
-                  fontFamily: 'EquitanSans, sans-serif', fontWeight: 500, fontSize: 13,
+                  fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 500, fontSize: 13,
                   color: 'rgba(255,255,255,0.65)', textDecoration: 'none', padding: '8px 14px',
                   borderRadius: 8, transition: 'all 0.2s', display: 'block',
                 }}
@@ -137,7 +137,7 @@ export default function Navbar() {
             {/* Country selector button */}
             <li style={{ position: 'relative' }}>
               <button onClick={() => { setShowCountry(!showCountry); setSearch('') }}
-                style={{ ...btnStyle, gap: 6, width: 'auto', padding: '0 12px', fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.7)', fontFamily: 'EquitanSans, sans-serif' }}
+                style={{ ...btnStyle, gap: 6, width: 'auto', padding: '0 12px', fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.7)', fontFamily: 'var(--font-heading), Michroma, sans-serif' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.12)' }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)' }}
               >
@@ -202,7 +202,7 @@ export default function Navbar() {
 
             <li style={{ marginLeft: 4 }}>
               <a href="https://cal.com/saim-hussain-9ekrz6" target="_blank" rel="noreferrer" style={{
-                fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 12,
+                fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 700, fontSize: 12,
                 letterSpacing: 1, textTransform: 'uppercase',
                 background: 'linear-gradient(135deg, #83C732, #7A9137)',
                 color: '#fff', padding: '10px 22px', textDecoration: 'none',

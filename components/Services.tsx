@@ -34,11 +34,11 @@ export default function Services() {
             <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--orange)' }}>Services / Capabilities</span>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 60, flexWrap: 'wrap', gap: 20 }}>
-            <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: 'var(--text)' }}>
+            <h2 style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: 'var(--text)' }}>
               What we deploy<br /><span style={{ color: 'var(--orange)' }}>for you.</span>
             </h2>
             <a href="https://cal.com/saim-hussain-9ekrz6" target="_blank" rel="noreferrer" style={{
-              fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 12, letterSpacing: 1,
+              fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 700, fontSize: 12, letterSpacing: 1,
               textTransform: 'uppercase', background: 'var(--surface-2)', color: 'var(--text)', padding: '13px 26px',
               textDecoration: 'none', borderRadius: 8, transition: 'all 0.2s', flexShrink: 0,
               border: '1px solid var(--border-2)', backdropFilter: 'blur(12px)',
@@ -63,8 +63,8 @@ export default function Services() {
                 onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border)'; el.style.transform = 'translateY(0)'; el.style.background = 'var(--surface)'; el.style.boxShadow = 'none' }}
               >
                 <div style={{ color: 'var(--orange)', marginBottom: 16, display: 'flex' }}>{icons[s.tag]}</div>
-                <div style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: 2, color: 'var(--text-5)', marginBottom: 10 }}>{s.tag}</div>
-                <h3 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 16, color: 'var(--text)', marginBottom: 12, lineHeight: 1.3 }}>{s.title}</h3>
+                <div style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: 2, color: 'var(--text-5)', marginBottom: 10 }}>{s.tag}</div>
+                <h3 style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 700, fontSize: 16, color: 'var(--text)', marginBottom: 12, lineHeight: 1.3 }}>{s.title}</h3>
                 <p style={{ fontSize: 13, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.7 }}>{s.desc}</p>
               </div>
             </Reveal>

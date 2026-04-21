@@ -55,7 +55,7 @@ function CaseCard({ c, index }: { c: typeof cases[0], index: number }) {
       <div className="case-inner" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
         <div style={{ padding: '36px 32px', borderRight: '1px solid var(--border-3)', borderBottom: '1px solid var(--border-3)' }}>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--text-5)', marginBottom: 10 }}>{c.tag}</div>
-          <h3 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(22px, 2.5vw, 32px)', color: 'var(--text)', letterSpacing: -1, lineHeight: 1.1, marginBottom: 16 }}>{c.title}</h3>
+          <h3 style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 'clamp(22px, 2.5vw, 32px)', color: 'var(--text)', letterSpacing: -1, lineHeight: 1.1, marginBottom: 16 }}>{c.title}</h3>
           <p style={{ fontSize: 13, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.75, marginBottom: 20 }}>{c.desc}</p>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             {c.tags.map((t, j) => <span key={j} style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: 'var(--orange)', background: 'var(--orange-subtle)', border: '1px solid rgba(131,199,50,0.2)', padding: '4px 10px', borderRadius: 6 }}>{t}</span>)}
@@ -67,7 +67,7 @@ function CaseCard({ c, index }: { c: typeof cases[0], index: number }) {
             {c.before.map((b, j) => (
               <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 14, borderBottom: '1px solid var(--border-3)' }}>
                 <span style={{ fontSize: 12, color: 'var(--text-4)' }}>{b.l}</span>
-                <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 14, color: 'var(--text-6)' }}>{b.v}</span>
+                <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 700, fontSize: 14, color: 'var(--text-6)' }}>{b.v}</span>
               </div>
             ))}
           </div>
@@ -78,12 +78,12 @@ function CaseCard({ c, index }: { c: typeof cases[0], index: number }) {
             {c.after.map((a, j) => (
               <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 14, borderBottom: '1px solid rgba(131,199,50,0.08)' }}>
                 <span style={{ fontSize: 12, color: 'var(--text-4)' }}>{a.l}</span>
-                <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 14, color: 'var(--orange)' }}>{a.v}</span>
+                <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 700, fontSize: 14, color: 'var(--orange)' }}>{a.v}</span>
               </div>
             ))}
           </div>
           <div style={{ marginTop: 20, display: 'inline-flex', alignItems: 'baseline', gap: 6 }}>
-            <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 36, color: 'var(--orange)', letterSpacing: -1 }}>{c.result}</span>
+            <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 36, color: 'var(--orange)', letterSpacing: -1 }}>{c.result}</span>
             <span style={{ fontSize: 12, color: 'var(--text-4)', fontWeight: 500 }}>{c.resultLabel}</span>
           </div>
         </div>
@@ -100,7 +100,7 @@ export default function CaseStudies() {
           <span style={{ width: 24, height: 3, background: 'var(--orange)', borderRadius: 2 }} />
           <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--orange)' }}>Case Studies</span>
         </div>
-        <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: 'var(--text)', marginBottom: 72 }}>
+        <h2 style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: 'var(--text)', marginBottom: 72 }}>
           The data you need.<br /><span style={{ color: 'var(--orange)' }}>Real outcomes.</span>
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

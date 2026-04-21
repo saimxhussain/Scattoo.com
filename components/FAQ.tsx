@@ -15,25 +15,26 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <section id="faq" style={{ padding: '120px 0', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}>
+    <section id="faq" style={{ padding: '90px 0', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}>
       <div className="orb" style={{ width: 400, height: 400, background: 'rgba(131,199,50,0.06)', bottom: -100, right: -100, animation: 'orbMove2 18s ease-in-out infinite' }} />
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
         <Reveal>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <span style={{ width: 24, height: 3, background: 'var(--orange)', borderRadius: 2 }} />
-            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--orange)' }}>FAQ</span>
+            <span style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 12, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--orange)' }}>FAQ</span>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 60, alignItems: 'start', marginBottom: 60 }}>
-            <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: 'var(--text)', margin: 0 }}>
-              Questions,<br /><span style={{ color: 'var(--orange)' }}>answered.</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 20, marginBottom: 40 }}>
+            <h2 style={{ fontFamily: 'var(--font-display), MonumentExtended, sans-serif', fontSize: 'clamp(44px, 5.5vw, 72px)', lineHeight: 1.0, letterSpacing: 1, color: 'var(--text)', margin: 0 }}>
+              Questions, <span style={{ color: 'var(--orange)' }}>answered.</span>
             </h2>
-            <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.8, margin: 0, paddingTop: 8 }}>
-              Everything you need to know before booking a call. Can&apos;t find your answer? <a href="mailto:saimxhussain@gmail.com" style={{ color: 'var(--orange)', textDecoration: 'none' }}>Email us directly →</a>
+            <p style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, margin: 0 }}>
+              Can&apos;t find your answer?{' '}
+              <a href="mailto:saimm.dev@gmail.com" style={{ color: 'var(--orange)', textDecoration: 'none' }}>Email us →</a>
             </p>
           </div>
         </Reveal>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {faqs.map((faq, i) => (
             <div key={i} onClick={() => setOpen(open === i ? null : i)} style={{
               background: open === i ? 'var(--orange-surface)' : 'var(--surface-3)',
@@ -43,22 +44,17 @@ export default function FAQ() {
               onMouseEnter={e => { if (open !== i) { const el = e.currentTarget as HTMLElement; el.style.background = 'var(--surface)'; el.style.borderColor = 'var(--border-2)' } }}
               onMouseLeave={e => { if (open !== i) { const el = e.currentTarget as HTMLElement; el.style.background = 'var(--surface-3)'; el.style.borderColor = 'var(--border)' } }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20, padding: '24px 28px' }}>
-                <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 'clamp(14px, 2vw, 17px)', color: 'var(--text)', lineHeight: 1.4 }}>{faq.q}</span>
-                <div style={{
-                  width: 32, height: 32, borderRadius: 8, flexShrink: 0,
-                  background: open === i ? 'var(--orange)' : 'var(--surface-2)',
-                  border: `1px solid ${open === i ? 'var(--orange)' : 'var(--border-2)'}`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.25s ease',
-                }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={open === i ? '#fff' : 'var(--text)'} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20, padding: '20px 24px' }}>
+                <span style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontWeight: 600, fontSize: 'clamp(15px, 2vw, 18px)', color: 'var(--text)', lineHeight: 1.4 }}>{faq.q}</span>
+                <div style={{ width: 30, height: 30, borderRadius: 8, flexShrink: 0, background: open === i ? 'var(--orange)' : 'var(--surface-2)', border: `1px solid ${open === i ? 'var(--orange)' : 'var(--border-2)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.25s ease' }}>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={open === i ? '#fff' : 'var(--text)'} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
                     style={{ transform: open === i ? 'rotate(45deg)' : 'rotate(0deg)', transition: 'transform 0.25s ease' }}>
                     <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
                   </svg>
                 </div>
               </div>
               <div style={{ maxHeight: open === i ? 200 : 0, overflow: 'hidden', transition: 'max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1)' }}>
-                <p style={{ fontSize: 15, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.85, margin: 0, padding: '0 28px 24px' }}>{faq.a}</p>
+                <p style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 16, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.8, margin: 0, padding: '0 24px 20px' }}>{faq.a}</p>
               </div>
             </div>
           ))}

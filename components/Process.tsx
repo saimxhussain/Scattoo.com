@@ -8,10 +8,11 @@ const steps = [
   { num: '03', title: 'Deploy', sub: 'Go live with confidence', desc: 'We push your systems into production. From that point forward, monitoring and iteration are on us. Your team can focus on growth; the AI handles execution — around the clock, without supervision.', tags: ['Live deployment', 'System monitoring', 'Ongoing optimization'] },
 ]
 
+// 1,3 → left to right (fromLeft), 2 → right to left (fromRight)
 function StepCard({ s, i }: { s: typeof steps[0], i: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
-  const fromRight = i % 2 !== 0
+  const fromRight = i === 1 // step 2 slides from right
 
   useEffect(() => {
     const el = ref.current; if (!el) return
@@ -31,33 +32,33 @@ function StepCard({ s, i }: { s: typeof steps[0], i: number }) {
         borderRadius: 20, overflow: 'hidden',
         border: '1px solid var(--border)',
         opacity: visible ? 1 : 0,
-        transform: visible ? 'translateX(0) translateY(0)' : fromRight ? 'translateX(56px)' : 'translateX(-56px)',
-        transition: `opacity 0.65s ease ${i * 0.12}s, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${i * 0.12}s, box-shadow 0.25s ease, border-color 0.25s ease`,
+        transform: visible ? 'translateX(0) translateY(0)' : fromRight ? 'translateX(72px)' : 'translateX(-72px)',
+        transition: `opacity 0.7s ease ${i * 0.1}s, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${i * 0.1}s, box-shadow 0.25s ease, border-color 0.25s ease`,
         boxShadow: '0 4px 32px rgba(0,0,0,0.12)',
       }}
-        onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(131,199,50,0.3)'; el.style.boxShadow = '0 12px 48px rgba(131,199,50,0.12)' }}
+        onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(131,199,50,0.35)'; el.style.boxShadow = '0 16px 52px rgba(131,199,50,0.14)' }}
         onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border)'; el.style.boxShadow = '0 4px 32px rgba(0,0,0,0.12)' }}
       >
         <div style={{
-          padding: '64px 52px', display: 'flex', flexDirection: 'column', justifyContent: 'center',
+          padding: '56px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'center',
           order: fromRight ? 1 : 0,
           borderRight: fromRight ? 'none' : '1px solid var(--border-3)',
           borderLeft: fromRight ? '1px solid var(--border-3)' : 'none',
           background: fromRight ? 'var(--surface-3)' : 'transparent',
         }}>
-          <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(84px, 11vw, 132px)', color: 'var(--orange-subtle)', lineHeight: 0.8, marginBottom: 28, userSelect: 'none' as const, letterSpacing: -6 }}>{s.num}</div>
-          <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(30px, 3.8vw, 48px)', color: 'var(--text)', letterSpacing: -1.5, marginBottom: 12, lineHeight: 1.05 }}>{s.title}</div>
-          <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--orange)', letterSpacing: 0.3 }}>{s.sub}</div>
+          <div style={{ fontFamily: 'var(--font-display), MonumentExtended, sans-serif', fontSize: 'clamp(84px, 11vw, 130px)', color: 'var(--orange-subtle)', lineHeight: 0.8, marginBottom: 24, userSelect: 'none' as const, letterSpacing: -2 }}>{s.num}</div>
+          <div style={{ fontFamily: 'var(--font-display), MonumentExtended, sans-serif', fontSize: 'clamp(36px, 4vw, 54px)', color: 'var(--text)', letterSpacing: 1, marginBottom: 12, lineHeight: 1.0 }}>{s.title}</div>
+          <div style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 16, fontWeight: 600, color: 'var(--orange)', letterSpacing: 0.3 }}>{s.sub}</div>
         </div>
         <div style={{
-          padding: '64px 52px', display: 'flex', flexDirection: 'column', justifyContent: 'center',
+          padding: '56px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'center',
           order: fromRight ? 0 : 1,
           background: fromRight ? 'transparent' : 'var(--surface-3)',
         }}>
-          <p style={{ fontSize: 16, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.9, marginBottom: 32, maxWidth: 440 }}>{s.desc}</p>
+          <p style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 17, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.85, marginBottom: 32, maxWidth: 440 }}>{s.desc}</p>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
             {s.tags.map((t, j) => (
-              <span key={j} style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 12, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: 'var(--orange)', background: 'var(--orange-subtle)', border: '1px solid rgba(131,199,50,0.25)', padding: '6px 14px', borderRadius: 8 }}>{t}</span>
+              <span key={j} style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 12, fontWeight: 700, letterSpacing: 1.2, textTransform: 'uppercase', color: 'var(--orange)', background: 'var(--orange-subtle)', border: '1px solid rgba(131,199,50,0.25)', padding: '6px 14px', borderRadius: 8 }}>{t}</span>
             ))}
           </div>
         </div>
@@ -68,16 +69,16 @@ function StepCard({ s, i }: { s: typeof steps[0], i: number }) {
 
 export default function Process() {
   return (
-    <section id="process" style={{ padding: '140px 0', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}>
+    <section id="process" style={{ padding: '120px 0', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}>
       <div className="orb" style={{ width: 350, height: 350, background: 'rgba(131,199,50,0.06)', bottom: -80, right: -80, animation: 'orbMove 20s ease-in-out infinite' }} />
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
         <Reveal>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
             <span style={{ width: 28, height: 3, background: 'var(--orange)', borderRadius: 2 }} />
-            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--orange)' }}>Process / Timeline</span>
+            <span style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--orange)' }}>Process / Timeline</span>
           </div>
-          <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(40px, 5vw, 64px)', lineHeight: 1.05, letterSpacing: -2, color: 'var(--text)', marginBottom: 80 }}>
-            How it works,<br /><span style={{ color: 'var(--orange)' }}>step by step.</span>
+          <h2 style={{ fontFamily: 'var(--font-display), MonumentExtended, sans-serif', fontSize: 'clamp(48px, 6vw, 80px)', lineHeight: 1.0, letterSpacing: 1, color: 'var(--text)', marginBottom: 72 }}>
+            How it works,{' '}<span style={{ color: 'var(--orange)' }}>step by step.</span>
           </h2>
         </Reveal>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
@@ -87,13 +88,7 @@ export default function Process() {
       <style>{`
         @media(max-width:768px){
           .process-card{grid-template-columns:1fr !important;}
-          .process-card > div{
-            order:unset !important;
-            border-left:none !important;
-            border-right:none !important;
-            border-bottom:1px solid var(--border-3);
-            padding:40px 28px !important;
-          }
+          .process-card > div{order:unset !important;border-left:none !important;border-right:none !important;border-bottom:1px solid var(--border-3);padding:36px 24px !important;}
         }
       `}</style>
     </section>

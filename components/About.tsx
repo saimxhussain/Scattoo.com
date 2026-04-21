@@ -58,7 +58,7 @@ function MetricCard({ m, i }: { m: typeof metrics[0], i: number }) {
       onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-4px)'; el.style.boxShadow = i === 0 ? '0 16px 48px rgba(131,199,50,0.45)' : '0 8px 32px rgba(0,0,0,0.15)' }}
       onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = i === 0 ? '0 8px 32px rgba(131,199,50,0.3)' : 'none' }}
     >
-      <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 40, color: i === 0 ? '#fff' : 'var(--orange)', lineHeight: 1, letterSpacing: -1, marginBottom: 8 }}>
+      <div style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 40, color: i === 0 ? '#fff' : 'var(--orange)', lineHeight: 1, letterSpacing: -1, marginBottom: 8 }}>
         <CountUp target={parseInt(m.val)} suffix={m.suffix} started={started} />
       </div>
       <div style={{ fontSize: 12, fontWeight: 500, color: i === 0 ? 'rgba(255,255,255,0.8)' : 'var(--text-4)', lineHeight: 1.5 }}>{m.label}</div>
@@ -78,7 +78,7 @@ export default function About() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 60, alignItems: 'start' }}>
             <div>
-              <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: 'var(--text)', marginBottom: 28 }}>
+              <h2 style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: 'var(--text)', marginBottom: 28 }}>
                 Your business,<br /><span style={{ color: 'var(--orange)' }}>on autopilot.</span>
               </h2>
               <p style={{ fontSize: 16, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.85, marginBottom: 20 }}>

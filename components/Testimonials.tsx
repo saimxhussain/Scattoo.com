@@ -55,7 +55,7 @@ export default function Testimonials() {
           <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--orange)' }}>Client Results</span>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 20 }}>
-          <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(40px, 5vw, 64px)', lineHeight: 1.05, letterSpacing: -2, color: 'var(--text)' }}>
+          <h2 style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 'clamp(40px, 5vw, 64px)', lineHeight: 1.05, letterSpacing: -2, color: 'var(--text)' }}>
             Real clients.<br /><span style={{ color: 'var(--orange)' }}>Real results.</span>
           </h2>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -65,7 +65,7 @@ export default function Testimonials() {
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
             </button>
-            <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 14, fontWeight: 600, color: 'var(--text-5)', minWidth: 44, textAlign: 'center' }}>{active + 1} / {cards.length}</span>
+            <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 14, fontWeight: 600, color: 'var(--text-5)', minWidth: 44, textAlign: 'center' }}>{active + 1} / {cards.length}</span>
             <button onClick={next} disabled={active === cards.length - 1} style={btnStyle(active === cards.length - 1)}
               onMouseEnter={e => { if (active < cards.length - 1) { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--orange)'; el.style.color = 'var(--orange)' } }}
               onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border-2)'; el.style.color = active === cards.length - 1 ? 'var(--text-6)' : 'var(--text-3)' }}
@@ -102,7 +102,7 @@ export default function Testimonials() {
                   <div style={{ width: 30, height: 30, borderRadius: 8, background: 'rgba(239,68,68,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
                   </div>
-                  <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: '#ef4444' }}>Problem</span>
+                  <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: '#ef4444' }}>Problem</span>
                 </div>
                 <p style={{ fontSize: 15, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.85, margin: 0 }}>{card.problem}</p>
               </div>
@@ -112,7 +112,7 @@ export default function Testimonials() {
                   <div style={{ width: 30, height: 30, borderRadius: 8, background: 'rgba(131,199,50,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
                   </div>
-                  <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: 'var(--orange)' }}>Solution</span>
+                  <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: 'var(--orange)' }}>Solution</span>
                 </div>
                 <p style={{ fontSize: 15, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.85, margin: 0 }}>{card.solution}</p>
               </div>
@@ -122,7 +122,7 @@ export default function Testimonials() {
                   <div style={{ width: 30, height: 30, borderRadius: 8, background: 'var(--orange-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--orange)"><path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575z" /></svg>
                   </div>
-                  <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: 'var(--orange)' }}>Client Review</span>
+                  <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: 'var(--orange)' }}>Client Review</span>
                 </div>
                 <p style={{ fontSize: 15, fontWeight: 400, color: 'var(--text-4)', lineHeight: 1.9, fontStyle: 'italic', margin: 0 }}>{card.review}</p>
               </div>

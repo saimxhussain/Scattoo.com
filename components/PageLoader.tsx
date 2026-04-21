@@ -56,7 +56,7 @@ export default function PageLoader() {
         transition: 'opacity 0.3s ease',
       }}>
         <div style={{
-          fontFamily: 'EquitanSans, sans-serif',
+          fontFamily: 'var(--font-heading), Michroma, sans-serif',
           fontWeight: 900,
           fontSize: 28,
           letterSpacing: 5,
