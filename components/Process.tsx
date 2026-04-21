@@ -3,16 +3,15 @@ import { useRef, useEffect, useState } from 'react'
 import Reveal from './Reveal'
 
 const steps = [
-  { num: '01', title: 'Discovery', sub: 'Understand your business inside out', desc: 'We map your current workflows, identify bottlenecks, and pinpoint exactly which tasks are stealing time from your team — and figure out the fastest way to eliminate them.', tags: ['Workflow audit', 'Goal alignment', 'System mapping'] },
-  { num: '02', title: 'Build', sub: 'Architect your digital workforce', desc: 'We design and build your automation pipelines. Connect your tools, sync your data, integrate AI agents — you get a clear roadmap showing exactly what we\'ll automate and the impact it will have.', tags: ['AI agent design', 'Pipeline architecture', 'Integration planning'] },
-  { num: '03', title: 'Deploy', sub: 'Go live with confidence', desc: 'We push your systems into production. From that point forward, monitoring and iteration are on us. Your team can focus on growth; the AI handles execution — around the clock, without supervision.', tags: ['Live deployment', 'System monitoring', 'Ongoing optimization'] },
+  { num: '01', title: 'Discovery', sub: 'Understand your business inside out', desc: 'We map your current workflows, identify bottlenecks, and pinpoint exactly which tasks are stealing time from your team.', tags: ['Workflow audit', 'Goal alignment', 'System mapping'] },
+  { num: '02', title: 'Build', sub: 'Architect your digital workforce', desc: 'We design and build your automation pipelines. Connect your tools, sync your data, integrate AI agents.', tags: ['AI agent design', 'Pipeline architecture', 'Integration planning'] },
+  { num: '03', title: 'Deploy', sub: 'Go live with confidence', desc: 'We push your systems into production. From that point forward, monitoring and iteration are on us.', tags: ['Live deployment', 'System monitoring', 'Ongoing optimization'] },
 ]
 
-// 1,3 → left to right (fromLeft), 2 → right to left (fromRight)
 function StepCard({ s, i }: { s: typeof steps[0], i: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
-  const fromRight = i === 1 // step 2 slides from right
+  const isRight = i % 2 !== 0 // Even index (0, 2) left, Odd index (1) right
 
   useEffect(() => {
     const el = ref.current; if (!el) return
@@ -24,41 +23,52 @@ function StepCard({ s, i }: { s: typeof steps[0], i: number }) {
   }, [])
 
   return (
-    <div ref={ref}>
+    <div ref={ref} className={`timeline-item ${isRight ? 'right' : 'left'}`} style={{
+      display: 'flex',
+      justifyContent: isRight ? 'flex-end' : 'flex-start',
+      width: '100%',
+      position: 'relative',
+      marginBottom: '60px',
+      opacity: visible ? 1 : 0,
+      transform: visible ? 'translateY(0)' : 'translateY(40px)',
+      transition: `all 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.2}s`
+    }}>
+      {/* The Red Connector Dot */}
+      <div className="timeline-dot" style={{
+        position: 'absolute',
+        left: '50%',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '20px',
+        height: '20px',
+        background: '#FF4D4D', // Your red dot color
+        borderRadius: '50%',
+        border: '4px solid var(--surface)',
+        zIndex: 10,
+        boxShadow: '0 0 15px rgba(255, 77, 77, 0.6)'
+      }} />
+
+      {/* The Content Card */}
       <div className="process-card" style={{
-        display: 'grid', gridTemplateColumns: '1fr 1fr',
+        width: '45%',
         background: 'var(--surface)',
-        backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
-        borderRadius: 20, overflow: 'hidden',
+        backdropFilter: 'blur(24px)',
+        borderRadius: 20,
+        overflow: 'hidden',
         border: '1px solid var(--border)',
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateX(0) translateY(0)' : fromRight ? 'translateX(72px)' : 'translateX(-72px)',
-        transition: `opacity 0.7s ease ${i * 0.1}s, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${i * 0.1}s, box-shadow 0.25s ease, border-color 0.25s ease`,
         boxShadow: '0 4px 32px rgba(0,0,0,0.12)',
-      }}
-        onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(131,199,50,0.35)'; el.style.boxShadow = '0 16px 52px rgba(131,199,50,0.14)' }}
-        onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border)'; el.style.boxShadow = '0 4px 32px rgba(0,0,0,0.12)' }}
-      >
-        <div style={{
-          padding: '56px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'center',
-          order: fromRight ? 1 : 0,
-          borderRight: fromRight ? 'none' : '1px solid var(--border-3)',
-          borderLeft: fromRight ? '1px solid var(--border-3)' : 'none',
-          background: fromRight ? 'var(--surface-3)' : 'transparent',
-        }}>
-          <div style={{ fontFamily: 'var(--font-display), MonumentExtended, sans-serif', fontSize: 'clamp(84px, 11vw, 130px)', color: 'var(--orange-subtle)', lineHeight: 0.8, marginBottom: 24, userSelect: 'none' as const, letterSpacing: -2 }}>{s.num}</div>
-          <div style={{ fontFamily: 'var(--font-display), MonumentExtended, sans-serif', fontSize: 'clamp(36px, 4vw, 54px)', color: 'var(--text)', letterSpacing: 1, marginBottom: 12, lineHeight: 1.0 }}>{s.title}</div>
-          <div style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 16, fontWeight: 600, color: 'var(--orange)', letterSpacing: 0.3 }}>{s.sub}</div>
+        display: 'flex',
+        flexDirection: 'column'
+      }}>
+        <div style={{ padding: '32px', background: 'var(--surface-3)', borderBottom: '1px solid var(--border-3)' }}>
+          <div style={{ fontFamily: 'var(--font-display)', fontSize: '42px', color: 'var(--orange-subtle)', lineHeight: 1 }}>{s.num}</div>
+          <div style={{ fontFamily: 'var(--font-display)', fontSize: '24px', color: 'var(--text)', marginTop: 10 }}>{s.title}</div>
         </div>
-        <div style={{
-          padding: '56px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'center',
-          order: fromRight ? 0 : 1,
-          background: fromRight ? 'transparent' : 'var(--surface-3)',
-        }}>
-          <p style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 17, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.85, marginBottom: 32, maxWidth: 440 }}>{s.desc}</p>
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+        <div style={{ padding: '32px' }}>
+          <p style={{ fontSize: 15, color: 'var(--text-3)', lineHeight: 1.6, marginBottom: 20 }}>{s.desc}</p>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             {s.tags.map((t, j) => (
-              <span key={j} style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 12, fontWeight: 700, letterSpacing: 1.2, textTransform: 'uppercase', color: 'var(--orange)', background: 'var(--orange-subtle)', border: '1px solid rgba(131,199,50,0.25)', padding: '6px 14px', borderRadius: 8 }}>{t}</span>
+              <span key={j} style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', color: 'var(--orange)', background: 'var(--orange-subtle)', padding: '4px 10px', borderRadius: 4 }}>{t}</span>
             ))}
           </div>
         </div>
@@ -69,26 +79,39 @@ function StepCard({ s, i }: { s: typeof steps[0], i: number }) {
 
 export default function Process() {
   return (
-    <section id="process" style={{ padding: '120px 0', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}>
-      <div className="orb" style={{ width: 350, height: 350, background: 'rgba(131,199,50,0.06)', bottom: -80, right: -80, animation: 'orbMove 20s ease-in-out infinite' }} />
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
+    <section id="process" style={{ padding: '120px 0', position: 'relative', background: '#000' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
+        
         <Reveal>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-            <span style={{ width: 28, height: 3, background: 'var(--orange)', borderRadius: 2 }} />
-            <span style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--orange)' }}>Process / Timeline</span>
-          </div>
-          <h2 style={{ fontFamily: 'var(--font-display), MonumentExtended, sans-serif', fontSize: 'clamp(48px, 6vw, 80px)', lineHeight: 1.0, letterSpacing: 1, color: 'var(--text)', marginBottom: 72 }}>
-            How it works,{' '}<span style={{ color: 'var(--orange)' }}>step by step.</span>
+           <h2 style={{ textAlign: 'center', fontFamily: 'var(--font-display)', fontSize: 'clamp(40px, 5vw, 64px)', color: '#fff', marginBottom: '100px' }}>
+            Our <span style={{ color: 'var(--orange)' }}>Workflow.</span>
           </h2>
         </Reveal>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          {steps.map((s, i) => <StepCard key={i} s={s} i={i} />)}
+
+        <div style={{ position: 'relative' }}>
+          {/* Central Vertical Line */}
+          <div className="timeline-line" style={{
+            position: 'absolute',
+            left: '50%',
+            top: 0,
+            bottom: 0,
+            width: '2px',
+            background: 'rgba(255,255,255,0.1)',
+            transform: 'translateX(-50%)'
+          }} />
+
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {steps.map((s, i) => <StepCard key={i} s={s} i={i} />)}
+          </div>
         </div>
       </div>
+
       <style>{`
         @media(max-width:768px){
-          .process-card{grid-template-columns:1fr !important;}
-          .process-card > div{order:unset !important;border-left:none !important;border-right:none !important;border-bottom:1px solid var(--border-3);padding:36px 24px !important;}
+          .timeline-line { left: 20px !important; }
+          .timeline-dot { left: 20px !important; }
+          .timeline-item { justify-content: flex-start !important; padding-left: 50px; }
+          .process-card { width: 100% !important; }
         }
       `}</style>
     </section>
