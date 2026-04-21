@@ -22,8 +22,8 @@ function LiquidText() {
       <span style={{
         fontFamily: 'var(--font-display), MonumentExtended, sans-serif',
         fontWeight: 800,
-        fontSize: 'clamp(40px, 6vw, 116px)',
-        letterSpacing: '-0.01em',
+        fontSize: 'clamp(34px, 4.8vw, 96px)',
+        letterSpacing: '0.08em',
         lineHeight: 1,
         whiteSpace: 'nowrap',
         display: 'block',
