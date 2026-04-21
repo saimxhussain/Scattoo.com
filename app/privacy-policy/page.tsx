@@ -72,7 +72,7 @@ const sections = [
 
 export default function PrivacyPolicy() {
   return (
-    <div style={{ background: '#fff', minHeight: '100vh', fontFamily: 'EquitanSans, sans-serif' }}>
+    <div style={{ background: '#fff', minHeight: '100vh', fontFamily: 'var(--font-heading), Michroma, sans-serif' }}>
       {/* Top nav bar */}
       <nav style={{
         position: 'sticky', top: 0, zIndex: 100,
@@ -82,12 +82,12 @@ export default function PrivacyPolicy() {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', height: 68, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
             <Image src="/logo.png" alt="AgentFlow" width={34} height={34} style={{ borderRadius: 6 }} />
-            <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 18, letterSpacing: 2, color: '#0a0a0a' }}>
-              AGENTFLOW<span style={{ color: '#FF4D00' }}>.</span>
+            <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 18, letterSpacing: 2, color: '#0a0a0a' }}>
+              AGENTFLOW<span style={{ color: '#83C732' }}>.</span>
             </span>
           </Link>
           <Link href="/" style={{
-            fontFamily: 'EquitanSans, sans-serif', fontSize: 12, fontWeight: 600,
+            fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 12, fontWeight: 600,
             color: '#666', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 6,
             padding: '8px 16px', borderRadius: 8, border: '1.5px solid #e8e8e8', transition: 'all 0.2s',
           }}
@@ -100,11 +100,11 @@ export default function PrivacyPolicy() {
       {/* Hero banner */}
       <div style={{ background: 'linear-gradient(135deg, #fff9f6 0%, #ffffff 60%, #f5f0ff 100%)', borderBottom: '1px solid #f0f0f0' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '72px 32px 64px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff4f0', border: '1px solid rgba(255,77,0,0.2)', padding: '5px 14px', borderRadius: 100, marginBottom: 24 }}>
-            <span style={{ width: 6, height: 6, background: '#FF4D00', borderRadius: '50%' }} />
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#FF4D00', letterSpacing: 1.5, textTransform: 'uppercase' }}>Legal</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff4f0', border: '1px solid rgba(131,199,50,0.2)', padding: '5px 14px', borderRadius: 100, marginBottom: 24 }}>
+            <span style={{ width: 6, height: 6, background: '#83C732', borderRadius: '50%' }} />
+            <span style={{ fontSize: 11, fontWeight: 700, color: '#83C732', letterSpacing: 1.5, textTransform: 'uppercase' }}>Legal</span>
           </div>
-          <h1 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 64px)', lineHeight: 1.0, letterSpacing: -2, color: '#0a0a0a', marginBottom: 16 }}>
+          <h1 style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 64px)', lineHeight: 1.0, letterSpacing: -2, color: '#0a0a0a', marginBottom: 16 }}>
             Privacy Policy
           </h1>
           <p style={{ fontSize: 15, color: '#999', fontWeight: 400 }}>Last updated: March 3, 2026</p>
@@ -124,7 +124,7 @@ export default function PrivacyPolicy() {
                   fontSize: 12, color: '#999', textDecoration: 'none', display: 'flex',
                   alignItems: 'center', gap: 8, padding: '5px 0', transition: 'color 0.2s', lineHeight: 1.4,
                 }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FF4D00'}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#83C732'}
                   onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#999'}
                 >
                   <span style={{ fontSize: 10, fontWeight: 700, color: '#ddd', minWidth: 20 }}>{s.num}</span>
@@ -143,8 +143,8 @@ export default function PrivacyPolicy() {
               borderBottom: i < sections.length - 1 ? '1px solid #f5f5f5' : 'none',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20 }}>
-                <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 11, color: '#FF4D00', letterSpacing: 2, minWidth: 24 }}>{s.num}</span>
-                <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 22, color: '#0a0a0a', letterSpacing: -0.5 }}>{s.title}</h2>
+                <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 11, color: '#83C732', letterSpacing: 2, minWidth: 24 }}>{s.num}</span>
+                <h2 style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 700, fontSize: 22, color: '#0a0a0a', letterSpacing: -0.5 }}>{s.title}</h2>
               </div>
 
               {s.content && (
@@ -157,7 +157,7 @@ export default function PrivacyPolicy() {
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                     {items.map((item: string) => (
                       <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, color: '#666', lineHeight: 1.6 }}>
-                        <span style={{ color: '#FF4D00', fontWeight: 700, marginTop: 2, flexShrink: 0 }}>›</span>
+                        <span style={{ color: '#83C732', fontWeight: 700, marginTop: 2, flexShrink: 0 }}>›</span>
                         {item}
                       </li>
                     ))}
@@ -169,7 +169,7 @@ export default function PrivacyPolicy() {
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {s.list.map((item: string) => (
                     <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, color: '#666', lineHeight: 1.7 }}>
-                      <span style={{ color: '#FF4D00', fontWeight: 700, marginTop: 2, flexShrink: 0 }}>›</span>
+                      <span style={{ color: '#83C732', fontWeight: 700, marginTop: 2, flexShrink: 0 }}>›</span>
                       {item}
                     </li>
                   ))}
@@ -177,15 +177,15 @@ export default function PrivacyPolicy() {
               )}
 
               {s.note && (
-                <div style={{ marginTop: 20, background: '#fff9f6', border: '1px solid rgba(255,77,0,0.15)', borderRadius: 10, padding: '14px 18px' }}>
+                <div style={{ marginTop: 20, background: '#fff9f6', border: '1px solid rgba(131,199,50,0.15)', borderRadius: 10, padding: '14px 18px' }}>
                   <p style={{ fontSize: 13, color: '#888', lineHeight: 1.7 }}>{s.note}</p>
                 </div>
               )}
 
               {s.contact && (
                 <div style={{ background: '#fafafa', borderRadius: 14, padding: '28px 28px', border: '1.5px solid #f0f0f0', marginTop: 8 }}>
-                  <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 18, color: '#0a0a0a', marginBottom: 4 }}>AgentFlow</div>
-                  <a href="mailto:saimxhussain@gmail.com" style={{ fontSize: 14, color: '#FF4D00', textDecoration: 'none', display: 'block', marginBottom: 4 }}>saimxhussain@gmail.com</a>
+                  <div style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 18, color: '#0a0a0a', marginBottom: 4 }}>AgentFlow</div>
+                  <a href="mailto:saimxhussain@gmail.com" style={{ fontSize: 14, color: '#83C732', textDecoration: 'none', display: 'block', marginBottom: 4 }}>saimxhussain@gmail.com</a>
                   <a href="/" style={{ fontSize: 14, color: '#999', textDecoration: 'none' }}>agentflow.ai</a>
                 </div>
               )}
@@ -195,7 +195,7 @@ export default function PrivacyPolicy() {
           {/* Footer note */}
           <div style={{ marginTop: 48, padding: '24px', background: '#f8f8f8', borderRadius: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
             <span style={{ fontSize: 12, color: '#aaa' }}>© 2025 AgentFlow — All rights reserved</span>
-            <Link href="/" style={{ fontSize: 12, color: '#FF4D00', textDecoration: 'none', fontWeight: 600 }}>← Back to Home</Link>
+            <Link href="/" style={{ fontSize: 12, color: '#83C732', textDecoration: 'none', fontWeight: 600 }}>← Back to Home</Link>
           </div>
         </div>
       </div>

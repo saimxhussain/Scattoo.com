@@ -2,39 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-Thin.otf') format('opentype'); font-weight:100; }
-@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-ExtraLight.otf') format('opentype'); font-weight:200; }
-@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-Light.otf') format('opentype'); font-weight:300; }
+@import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
+
+/* Degular — body font */
+@font-face { font-family:'Degular'; src:url('/fonts/DegularDemo-Regular.otf') format('opentype'); font-weight:400; font-display:swap; }
+@font-face { font-family:'Degular'; src:url('/fonts/DegularDemo-Medium.otf') format('opentype'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Degular'; src:url('/fonts/DegularDemo-Semibold.otf') format('opentype'); font-weight:600; font-display:swap; }
+@font-face { font-family:'Degular'; src:url('/fonts/DegularDemo-Bold.otf') format('opentype'); font-weight:700; font-display:swap; }
+@font-face { font-family:'Degular'; src:url('/fonts/DegularDemo-Black.otf') format('opentype'); font-weight:900; font-display:swap; }
+
+/* Monument Extended — display/hero headings */
+@font-face { font-family:'MonumentExtended'; src:url('/fonts/MonumentExtended-Regular.otf') format('opentype'); font-weight:400; font-display:swap; }
+@font-face { font-family:'MonumentExtended'; src:url('/fonts/MonumentExtended-Ultrabold.otf') format('opentype'); font-weight:800; font-display:swap; }
+
+/* Legacy — kept for any missed references */
 @font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-Regular.otf') format('opentype'); font-weight:400; }
-@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-SemiBold.otf') format('opentype'); font-weight:600; }
 @font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-Bold.otf') format('opentype'); font-weight:700; }
 @font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-Black.otf') format('opentype'); font-weight:900; }
-@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-BlackItalic.otf') format('opentype'); font-weight:900; font-style:italic; }
-@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-BoldItalic.otf') format('opentype'); font-weight:700; font-style:italic; }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
 /* ─── DARK THEME (default) ─────────────────────────────────── */
 :root, [data-theme="dark"] {
-  --bg:            #080810;
-  --bg-2:          #0d0d1a;
+  --bg:            #1F3037;
+  --bg-2:          #192830;
   --surface:       rgba(255,255,255,0.04);
   --surface-2:     rgba(255,255,255,0.07);
   --surface-3:     rgba(255,255,255,0.03);
   --border:        rgba(255,255,255,0.08);
   --border-2:      rgba(255,255,255,0.12);
   --border-3:      rgba(255,255,255,0.06);
-  --text:          #ffffff;
-  --text-2:        rgba(255,255,255,0.9);
-  --text-3:        rgba(255,255,255,0.6);
-  --text-4:        rgba(255,255,255,0.45);
-  --text-5:        rgba(255,255,255,0.3);
-  --text-6:        rgba(255,255,255,0.25);
-  --text-muted:    rgba(255,255,255,0.4);
-  --nav-bg:        rgba(8,8,16,0.92);
-  --nav-bg-blur:   rgba(8,8,16,0.6);
-  --drawer-bg:     rgba(8,8,16,0.97);
+  --text:          #F5F0EA;
+  --text-2:        rgba(245,240,234,0.92);
+  --text-3:        rgba(245,240,234,0.65);
+  --text-4:        rgba(245,240,234,0.45);
+  --text-5:        rgba(245,240,234,0.32);
+  --text-6:        rgba(245,240,234,0.25);
+  --text-muted:    rgba(245,240,234,0.42);
+  --nav-bg:        rgba(31,48,55,0.93);
+  --nav-bg-blur:   rgba(31,48,55,0.65);
+  --drawer-bg:     rgba(25,40,48,0.98);
   --glass-bg:      rgba(255,255,255,0.06);
   --glass-bg-strong: rgba(255,255,255,0.10);
   --glass-border:  rgba(255,255,255,0.11);
@@ -43,19 +51,19 @@ html { scroll-behavior: smooth; }
   --orange-glow:   rgba(131,199,50,0.4);
   --orange-subtle: rgba(131,199,50,0.10);
   --orange-surface:rgba(131,199,50,0.06);
-  --scrollbar-track: #111;
-  --scrollbar-thumb: #333;
-  --grid-line:     rgba(131,199,50,0.04);
-  --section-line:  rgba(255,255,255,0.06);
+  --scrollbar-track: #162028;
+  --scrollbar-thumb: #2e4550;
+  --grid-line:     rgba(131,199,50,0.05);
+  --section-line:  rgba(255,255,255,0.07);
   --metric-card-bg: rgba(255,255,255,0.05);
   --metric-card-border: rgba(255,255,255,0.10);
-  --loader-bg:     #080810;
+  --loader-bg:     #1F3037;
 }
 
 /* ─── LIGHT THEME ───────────────────────────────────────────── */
 [data-theme="light"] {
-  --bg:            #f5f5f0;
-  --bg-2:          #eeede8;
+  --bg:            #F5F0EA;
+  --bg-2:          #EDE8E1;
   --surface:       rgba(0,0,0,0.04);
   --surface-2:     rgba(0,0,0,0.07);
   --surface-3:     rgba(0,0,0,0.02);
@@ -69,34 +77,41 @@ html { scroll-behavior: smooth; }
   --text-5:        rgba(0,0,0,0.35);
   --text-6:        rgba(0,0,0,0.3);
   --text-muted:    rgba(0,0,0,0.45);
-  --nav-bg:        rgba(245,245,240,0.95);
-  --nav-bg-blur:   rgba(245,245,240,0.75);
-  --drawer-bg:     rgba(245,245,240,0.98);
+  --nav-bg:        rgba(245,240,234,0.95);
+  --nav-bg-blur:   rgba(245,240,234,0.75);
+  --drawer-bg:     rgba(245,240,234,0.98);
   --glass-bg:      rgba(0,0,0,0.05);
   --glass-bg-strong: rgba(0,0,0,0.09);
   --glass-border:  rgba(0,0,0,0.12);
   --glass-border-strong: rgba(0,0,0,0.20);
   --orange:        #83C732;
+  --orange-2:      #7A9137;
   --orange-glow:   rgba(131,199,50,0.35);
   --orange-subtle: rgba(131,199,50,0.10);
   --orange-surface:rgba(131,199,50,0.05);
-  --scrollbar-track: #e0e0d8;
-  --scrollbar-thumb: #bbb;
+  --scrollbar-track: #ddd8cf;
+  --scrollbar-thumb: #b8b0a4;
   --grid-line:     rgba(131,199,50,0.05);
   --section-line:  rgba(0,0,0,0.07);
   --metric-card-bg: rgba(0,0,0,0.04);
   --metric-card-border: rgba(0,0,0,0.09);
-  --loader-bg:     #f5f5f0;
+  --loader-bg:     #F5F0EA;
 }
 
 html {
-  font-size: 17px;
+  font-size: 18px;
+}
+
+:root {
+  --font-display: 'MonumentExtended', sans-serif;
+  --font-heading: 'Michroma', sans-serif;
+  --font-body: 'Degular', sans-serif;
 }
 
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'EquitanSans', sans-serif;
+  font-family: var(--font-body);
   font-weight: 400;
   font-size: 1rem;
   overflow-x: hidden;
@@ -158,13 +173,35 @@ section::before {
 .hide-scroll::-webkit-scrollbar{display:none}
 .hide-scroll{-ms-overflow-style:none;scrollbar-width:none}
 
+@keyframes fillUp {
+  0%   { background-position: 0% 100%; }
+  50%  { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+.footer-wordmark {
+  font-family: var(--font-display), 'MonumentExtended', sans-serif;
+  font-size: clamp(80px, 18vw, 240px);
+  line-height: 0.85;
+  letter-spacing: -4px;
+  text-align: center;
+  user-select: none;
+  background: linear-gradient(to top, #83C732 50%, rgba(245,240,234,0.12) 50%);
+  background-size: 100% 200%;
+  background-position: 0% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fillUp 3s ease-in-out infinite;
+}
+
 /* Mobile nav */
 .nav-links{display:flex;align-items:center;gap:4px;list-style:none}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:10px;backdrop-filter:blur(24px) saturate(180%)}
 .hamburger span{display:block;width:20px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s;opacity:0.8}
 .mobile-drawer{display:none;position:fixed;top:68px;left:0;right:0;background:var(--drawer-bg);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);border-bottom:1px solid var(--glass-border);padding:20px 24px 28px;z-index:199;flex-direction:column;gap:4px}
 .mobile-drawer.open{display:flex}
-.mobile-drawer a{font-family:'EquitanSans',sans-serif;font-weight:600;font-size:15px;color:var(--text-3);text-decoration:none;padding:12px 16px;border-radius:10px;transition:all 0.2s}
+.mobile-drawer a{font-family:var(--font-body),'Degular',sans-serif;font-weight:600;font-size:15px;color:var(--text-3);text-decoration:none;padding:12px 16px;border-radius:10px;transition:all 0.2s}
 .mobile-drawer a:hover,.mobile-drawer a:active{background:var(--glass-bg);color:var(--text)}
 .mobile-cta{margin-top:12px;background:var(--orange) !important;color:#fff !important;text-align:center;border-radius:10px}
 
