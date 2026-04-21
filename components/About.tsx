@@ -30,7 +30,7 @@ function CountUp({ target, suffix, started }: { target: number, suffix: string, 
   return <>{count}{suffix}</>
 }
 
-function MetricCard({ m, i }: { m: typeof metrics[0], i: number }) {
+function MetricCard({ m, i, isActive }: { m: typeof metrics[0], i: number, isActive: boolean }) {
   const ref = useRef<HTMLDivElement>(null)
   const [started, setStarted] = useState(false)
 
@@ -46,27 +46,36 @@ function MetricCard({ m, i }: { m: typeof metrics[0], i: number }) {
 
   return (
     <div ref={ref} style={{
-      background: i === 0 ? 'var(--orange)' : 'var(--metric-card-bg)',
+      background: isActive ? 'var(--orange)' : 'var(--metric-card-bg)',
       backdropFilter: 'blur(24px)',
       WebkitBackdropFilter: 'blur(24px)',
-      border: i === 0 ? 'none' : '1px solid var(--metric-card-border)',
+      border: isActive ? 'none' : '1px solid var(--metric-card-border)',
       padding: '32px 24px',
       borderRadius: i === 0 ? '16px 4px 4px 4px' : i === 1 ? '4px 16px 4px 4px' : i === 2 ? '4px 4px 4px 16px' : '4px 4px 16px 4px',
-      boxShadow: i === 0 ? '0 8px 32px rgba(131,199,50,0.3)' : 'none',
-      transition: 'transform 0.2s, box-shadow 0.2s',
+      boxShadow: isActive ? '0 8px 32px rgba(131,199,50,0.3)' : 'none',
+      transition: 'transform 0.2s, box-shadow 0.2s, background 0.5s ease, border 0.5s ease',
     }}
-      onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-4px)'; el.style.boxShadow = i === 0 ? '0 16px 48px rgba(131,199,50,0.45)' : '0 8px 32px rgba(0,0,0,0.15)' }}
-      onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = i === 0 ? '0 8px 32px rgba(131,199,50,0.3)' : 'none' }}
+      onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-4px)'; el.style.boxShadow = isActive ? '0 16px 48px rgba(131,199,50,0.45)' : '0 8px 32px rgba(0,0,0,0.15)' }}
+      onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = isActive ? '0 8px 32px rgba(131,199,50,0.3)' : 'none' }}
     >
-      <div style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 40, color: i === 0 ? '#fff' : 'var(--orange)', lineHeight: 1, letterSpacing: -1, marginBottom: 8 }}>
+      <div style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 40, color: isActive ? '#fff' : 'var(--orange)', lineHeight: 1, letterSpacing: -1, marginBottom: 8 }}>
         <CountUp target={parseInt(m.val)} suffix={m.suffix} started={started} />
       </div>
-      <div style={{ fontSize: 12, fontWeight: 500, color: i === 0 ? 'rgba(255,255,255,0.8)' : 'var(--text-4)', lineHeight: 1.5 }}>{m.label}</div>
+      <div style={{ fontSize: 12, fontWeight: 500, color: isActive ? 'rgba(255,255,255,0.8)' : 'var(--text-4)', lineHeight: 1.5 }}>{m.label}</div>
     </div>
   )
 }
 
 export default function About() {
+  const [activeMetric, setActiveMetric] = useState(0)
+  
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveMetric(prev => (prev + 1) % metrics.length)
+    }, 1800)
+    return () => clearInterval(timer)
+  }, [])
+
   return (
     <section id="about" style={{ padding: '120px 0', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}>
       <div className="orb" style={{ width: 400, height: 400, background: 'rgba(131,199,50,0.07)', top: -100, left: -100, animation: 'orbMove2 16s ease-in-out infinite' }} />
@@ -89,7 +98,7 @@ export default function About() {
               </p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3 }}>
-              {metrics.map((m, i) => <MetricCard key={i} m={m} i={i} />)}
+              {metrics.map((m, i) => <MetricCard key={i} m={m} i={i} isActive={i === activeMetric} />)}
             </div>
           </div>
         </Reveal>
