@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const TABS = [
   { id: 'b2b', label: 'B2B Lead Generator', tag: 'Lead Gen', src: 'https://res.cloudinary.com/dgh17nged/video/upload/q_auto/f_auto/v1776609526/B2B_Lead_Generator_ghhfmk.mp4' },
@@ -9,8 +9,31 @@ const TRUSTED = ['n8n', 'OpenAI', 'Apollo.io', 'HubSpot', 'LinkedIn', 'Make.com'
 
 // ─── Static Glass / Transparent Text ────────────────────────────────────────
 function LiquidText() {
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const textRef = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    const fit = () => {
+      const wrap = wrapRef.current
+      const text = textRef.current
+      if (!wrap || !text) return
+      // Reset scale so we get natural width
+      text.style.transform = 'scaleX(1)'
+      const available = wrap.offsetWidth - 4
+      const natural = text.scrollWidth
+      if (natural > available) {
+        text.style.transform = `scaleX(${available / natural})`
+      }
+    }
+    fit()
+    window.addEventListener('resize', fit)
+    // Also run after font loads
+    document.fonts?.ready.then(fit)
+    return () => window.removeEventListener('resize', fit)
+  }, [])
+
   return (
-    <div style={{
+    <div ref={wrapRef} style={{
       width: '100%',
       overflow: 'hidden',
       display: 'flex',
@@ -19,15 +42,15 @@ function LiquidText() {
       padding: '8px 0',
       pointerEvents: 'none',
     }}>
-      <span style={{
+      <span ref={textRef} style={{
         fontFamily: 'var(--font-display), MonumentExtended, sans-serif',
         fontWeight: 800,
-        fontSize: 'clamp(42px, 7.5vw, 120px)',
-        letterSpacing: '0.05em',
+        fontSize: '96px',
+        letterSpacing: '0.06em',
         lineHeight: 1,
         whiteSpace: 'nowrap',
-        display: 'block',
-        maxWidth: '100%',
+        display: 'inline-block',
+        transformOrigin: 'left center',
         WebkitTextStroke: '1.5px rgba(255,255,255,0.22)',
         background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(131,199,50,0.10) 45%, rgba(255,255,255,0.05) 100%)',
         WebkitBackgroundClip: 'text',
