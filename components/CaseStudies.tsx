@@ -34,7 +34,7 @@ function CaseCard({ c, index }: { c: typeof cases[0], index: number }) {
     if (!el) return
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect() } },
-      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
     )
     obs.observe(el)
     return () => obs.disconnect()
@@ -43,8 +43,8 @@ function CaseCard({ c, index }: { c: typeof cases[0], index: number }) {
   return (
     <div ref={ref} style={{
       opacity: visible ? 1 : 0,
-      transform: visible ? 'translateY(0) scale(1)' : 'translateY(60px) scale(0.98)',
-      transition: `opacity 0.6s ease ${index * 0.12}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${index * 0.12}s`,
+      transform: visible ? 'translateY(0) scale(1)' : 'translateY(80px) scale(0.97)',
+      transition: `opacity 0.9s cubic-bezier(0.22,1,0.36,1) ${index * 0.18}s, transform 0.9s cubic-bezier(0.22,1,0.36,1) ${index * 0.18}s`,
       background: 'var(--surface)',
       backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
       borderRadius: 20,
