@@ -3,16 +3,56 @@ import { useState, useRef } from 'react'
 import Image from 'next/image'
 
 const cards = [
-  { src: '/images/test_1.png', alt: 'Scaled to 2x Capacity', problem: "Hitting a growth ceiling — couldn't take on more clients without adding headcount.", solution: 'Automated reporting and task creation so the team could focus on high-value work.', review: '"We reached a ceiling where we couldn\'t take on more clients. AgentFlow automated our reporting and task creation, freeing our team to focus on the work they actually love."' },
-  { src: '/images/test_2.png', alt: '65% Reduction in Churn', problem: 'Onboarding was a manual nightmare — users dropped off before completing setup.', solution: 'Fully automated onboarding sequence that guides users step-by-step without any manual emails.', review: '"Onboarding used to be a nightmare for our users. AgentFlow automated the entire setup sequence, guiding users through every step without a single manual email. It\'s seamless."' },
-  { src: '/images/test_3.png', alt: 'Instant Lead Response', problem: 'Losing 30% of leads due to slow follow-ups — sales reps couldn\'t respond fast enough.', solution: 'AI-response workflow that engages every new lead in under 60 seconds, 24/7.', review: '"We were losing 30% of our leads to slow follow-ups. AgentFlow\'s instant AI-response workflow now engages every lead in under 60 seconds. Our conversion rate has doubled!"' },
-  { src: '/images/test_4.png', alt: '90% Fewer Inventory Errors', problem: 'Overselling across 4 platforms due to manual stock sync — 20+ hours of data entry weekly.', solution: 'Real-time automated stock sync across all platforms — zero oversells, zero manual entry.', review: '"AgentFlow automated our stock sync between 4 platforms. We stopped overselling overnight and saved 20 hours of manual data entry every week. Absolute game changer."' },
-  { src: '/images/test_5.png', alt: 'Automated KYC Approvals', problem: 'Manual KYC verification was the biggest bottleneck — slowing down every new signup.', solution: 'API-integrated automation that handles 95% of KYC approvals instantly at scale.', review: '"Manual verification was our biggest bottleneck. AgentFlow integrated our API stack to automate 95% of approvals instantly. We can finally scale without hiring a massive ops team."' },
+  {
+    src: '/images/test_1.png',
+    headline: 'SCALED TO 2X\nCAPACITY',
+    label: 'SCALED TO 2X CAPACITY',
+    quoteBubble: '"We reached a ceiling where we couldn\'t take on more clients. AgentFlow automated our reporting and task creation, freeing our team to focus on the work they actually love."',
+    problem: "Hitting a growth ceiling — couldn't take on more clients without adding headcount.",
+    solution: 'Automated reporting and task creation so the team could focus on high-value work.',
+    review: '"We reached a ceiling where we couldn\'t take on more clients. AgentFlow automated our reporting and task creation, freeing our team to focus on the work they actually love."',
+  },
+  {
+    src: '/images/test_2.png',
+    headline: '65% REDUCTION\nIN CHURN',
+    label: '65% REDUCTION IN CHURN',
+    quoteBubble: '"Onboarding used to be a nightmare for our users. AgentFlow automated the entire setup sequence, guiding users through every step without a single manual email. It\'s seamless."',
+    problem: 'Onboarding was a manual nightmare — users dropped off before completing setup.',
+    solution: 'Fully automated onboarding sequence that guides users step-by-step without any manual emails.',
+    review: '"Onboarding used to be a nightmare for our users. AgentFlow automated the entire setup sequence, guiding users through every step without a single manual email. It\'s seamless."',
+  },
+  {
+    src: '/images/test_3.png',
+    headline: 'INSTANT LEAD\nRESPONSE',
+    label: 'INSTANT LEAD RESPONSE',
+    quoteBubble: '"We were losing 30% of our leads to slow follow-ups. AgentFlow\'s instant AI-response workflow now engages every lead in under 60 seconds. Our conversion rate has doubled!"',
+    problem: "Losing 30% of leads due to slow follow-ups — sales reps couldn't respond fast enough.",
+    solution: 'AI-response workflow that engages every new lead in under 60 seconds, 24/7.',
+    review: '"We were losing 30% of our leads to slow follow-ups. AgentFlow\'s instant AI-response workflow now engages every lead in under 60 seconds. Our conversion rate has doubled!"',
+  },
+  {
+    src: '/images/test_4.png',
+    headline: '90% FEWER\nINVENTORY\nERRORS',
+    label: '90% FEWER INVENTORY ERRORS',
+    quoteBubble: '"AgentFlow automated our stock sync between 4 platforms. We stopped overselling overnight and saved 20 hours of manual data entry every week. Absolute game changer."',
+    problem: 'Overselling across 4 platforms due to manual stock sync — 20+ hours of data entry weekly.',
+    solution: 'Real-time automated stock sync across all platforms — zero oversells, zero manual entry.',
+    review: '"AgentFlow automated our stock sync between 4 platforms. We stopped overselling overnight and saved 20 hours of manual data entry every week. Absolute game changer."',
+  },
+  {
+    src: '/images/test_5.png',
+    headline: 'AUTOMATED KYC\nAPPROVALS',
+    label: 'AUTOMATED KYC APPROVALS',
+    quoteBubble: '"Manual verification was our biggest bottleneck. AgentFlow integrated our API stack to automate 95% of approvals instantly. We can finally scale without hiring a massive ops team."',
+    problem: 'Manual KYC verification was the biggest bottleneck — slowing down every new signup.',
+    solution: 'API-integrated automation that handles 95% of KYC approvals instantly at scale.',
+    review: '"Manual verification was our biggest bottleneck. AgentFlow integrated our API stack to automate 95% of approvals instantly. We can finally scale without hiring a massive ops team."',
+  },
 ]
 
 export default function Testimonials() {
   const [active, setActive] = useState(0)
-  const [animDir, setAnimDir] = useState<'left'|'right'>('right')
+  const [animDir, setAnimDir] = useState<'left' | 'right'>('right')
   const [animating, setAnimating] = useState(false)
   const card = cards[active]
 
@@ -25,7 +65,7 @@ export default function Testimonials() {
     if (delta < 0 && active > 0) navigate(active - 1, 'left')
   }
 
-  const navigate = (to: number, dir: 'left'|'right') => {
+  const navigate = (to: number, dir: 'left' | 'right') => {
     if (animating || to === active) return
     setAnimDir(dir)
     setAnimating(true)
@@ -46,14 +86,20 @@ export default function Testimonials() {
   })
 
   return (
-    <section onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} style={{ padding: '120px 0', background: 'var(--bg)', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}>
+    <section
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      style={{ padding: '120px 0', background: 'var(--bg)', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}
+    >
       <div className="orb" style={{ width: 500, height: 500, background: 'rgba(131,199,50,0.06)', top: -100, right: -100, animation: 'orbMove 20s ease-in-out infinite' }} />
 
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', position: 'relative', zIndex: 1 }}>
+
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
           <span style={{ width: 28, height: 3, background: 'var(--orange)', borderRadius: 2 }} />
           <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--orange)' }}>Client Results</span>
         </div>
+
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 20 }}>
           <h2 style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 'clamp(40px, 5vw, 64px)', lineHeight: 1.05, letterSpacing: -2, color: 'var(--text)' }}>
             Real clients.<br /><span style={{ color: 'var(--orange)' }}>Real results.</span>
@@ -65,7 +111,7 @@ export default function Testimonials() {
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
             </button>
-            <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 14, fontWeight: 600, color: 'var(--text-5)', minWidth: 44, textAlign: 'center' }}>{cards.length - active} / {cards.length}</span>
+            <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 14, fontWeight: 600, color: 'var(--text-5)', minWidth: 44, textAlign: 'center' }}>{active + 1} / {cards.length}</span>
             <button onClick={next} disabled={active === cards.length - 1} style={btnStyle(active === cards.length - 1)}
               onMouseEnter={e => { if (active < cards.length - 1) { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--orange)'; el.style.color = 'var(--orange)' } }}
               onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border-2)'; el.style.color = active === cards.length - 1 ? 'var(--text-6)' : 'var(--text-3)' }}
@@ -83,24 +129,84 @@ export default function Testimonials() {
           borderRadius: 24, overflow: 'hidden',
           boxShadow: '0 32px 80px rgba(0,0,0,0.15)',
           opacity: animating ? 0 : 1,
-          transform: animating
-            ? `translateX(${animDir === 'right' ? '-24px' : '24px'})`
-            : 'translateX(0)',
+          transform: animating ? `translateX(${animDir === 'right' ? '-24px' : '24px'})` : 'translateX(0)',
           transition: 'opacity 0.28s ease, transform 0.28s ease',
         }}>
           <div className="testimonial-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }}>
-            {/* 1:1 image */}
-            <div style={{ position: 'relative', aspectRatio: '1 / 1', overflow: 'hidden', borderRight: '1px solid var(--border)' }}>
-              <Image src={card.src} alt={card.alt} fill style={{ objectFit: 'cover', opacity: 0.92 }} sizes="(max-width: 768px) 100vw, 50vw" />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%)' }} />
-              <div style={{ position: 'absolute', bottom: 20, left: 20, background: 'rgba(131,199,50,0.92)', backdropFilter: 'blur(8px)', color: '#fff', fontSize: 12, fontWeight: 700, letterSpacing: 1, padding: '6px 16px', borderRadius: 20, textTransform: 'uppercase' }}>{card.alt}</div>
+
+            {/* LEFT — photo with headline + quote bubble */}
+            <div style={{ position: 'relative', overflow: 'hidden', borderRight: '1px solid var(--border)', minHeight: 520 }}>
+              <Image
+                src={card.src}
+                alt={card.label}
+                fill
+                style={{ objectFit: 'cover', objectPosition: 'center top' }}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.65) 100%)' }} />
+
+              {/* Bold headline top-left */}
+              <div style={{ position: 'absolute', top: 28, left: 28, right: 28 }}>
+                <h3 style={{
+                  fontFamily: 'var(--font-heading), Michroma, sans-serif',
+                  fontWeight: 900,
+                  fontSize: 'clamp(24px, 2.8vw, 36px)',
+                  lineHeight: 1.1,
+                  color: '#fff',
+                  margin: 0,
+                  whiteSpace: 'pre-line',
+                  textShadow: '0 2px 16px rgba(0,0,0,0.6)',
+                  letterSpacing: -0.5,
+                }}>
+                  {card.headline}
+                </h3>
+              </div>
+
+              {/* Quote bubble */}
+              <div style={{
+                position: 'absolute',
+                bottom: 68,
+                left: 20,
+                right: 20,
+                background: 'rgba(235,235,235,0.9)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                borderRadius: 14,
+                padding: '16px 18px',
+              }}>
+                <p style={{ margin: 0, fontSize: 13, lineHeight: 1.7, color: '#111' }}>
+                  {card.quoteBubble}
+                </p>
+              </div>
+
+              {/* Green label pill */}
+              <div style={{
+                position: 'absolute',
+                bottom: 20,
+                left: 20,
+                background: 'var(--orange)',
+                color: '#fff',
+                fontSize: 10,
+                fontWeight: 700,
+                letterSpacing: 1.2,
+                padding: '6px 16px',
+                borderRadius: 20,
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-heading), Michroma, sans-serif',
+              }}>
+                {card.label}
+              </div>
             </div>
 
+            {/* RIGHT — Problem / Solution / Review */}
             <div style={{ display: 'flex', flexDirection: 'column' }}>
+
               <div style={{ padding: '36px 36px', borderBottom: '1px solid var(--border-3)', background: 'rgba(239,68,68,0.03)', flex: 1 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
                   <div style={{ width: 30, height: 30, borderRadius: 8, background: 'rgba(239,68,68,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
                   </div>
                   <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: '#ef4444' }}>Problem</span>
                 </div>
@@ -110,7 +216,9 @@ export default function Testimonials() {
               <div style={{ padding: '36px 36px', borderBottom: '1px solid var(--border-3)', background: 'var(--orange-surface)', flex: 1 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
                   <div style={{ width: 30, height: 30, borderRadius: 8, background: 'rgba(131,199,50,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
                   </div>
                   <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: 'var(--orange)' }}>Solution</span>
                 </div>
@@ -120,12 +228,15 @@ export default function Testimonials() {
               <div style={{ padding: '36px 36px', background: 'var(--surface-3)', flex: 1 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
                   <div style={{ width: 30, height: 30, borderRadius: 8, background: 'var(--orange-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--orange)"><path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575z" /></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--orange)">
+                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575z" />
+                    </svg>
                   </div>
                   <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: 'var(--orange)' }}>Client Review</span>
                 </div>
                 <p style={{ fontSize: 15, fontWeight: 400, color: 'var(--text-4)', lineHeight: 1.9, fontStyle: 'italic', margin: 0 }}>{card.review}</p>
               </div>
+
             </div>
           </div>
         </div>
@@ -146,7 +257,7 @@ export default function Testimonials() {
       <style>{`
         @media(max-width:768px){
           .testimonial-grid{grid-template-columns:1fr !important;}
-          .testimonial-grid > div:first-child{aspect-ratio:4/3 !important; border-right:none !important; border-bottom:1px solid var(--border);}
+          .testimonial-grid > div:first-child{min-height:360px !important; border-right:none !important; border-bottom:1px solid var(--border);}
         }
       `}</style>
     </section>
