@@ -101,7 +101,7 @@ export default function Testimonials() {
           }}>
             {cards.map((card, i) => (
               <div key={i} className="t-card" style={{
-                minWidth: 'calc(33.333% - 14px)',
+                minWidth: '260px',
                 borderRadius: 20,
                 overflow: 'hidden',
                 position: 'relative',
@@ -111,12 +111,12 @@ export default function Testimonials() {
                 flexShrink: 0,
               }}>
                 {/* Photo */}
-                <div style={{ position: 'relative', width: '100%', height: "200px", overflow: 'hidden' }}>
+                <div style={{ position: 'relative', width: '100%', height: "180px", overflow: 'hidden' }}>
                   <Image
                     src={card.src}
                     alt={card.name}
                     fill
-                    style={{ objectFit: 'cover', objectPosition: 'center top', transition: 'transform 0.5s ease' }}
+                    style={{ objectFit: 'cover', objectPosition: 'center center', transition: 'transform 0.5s ease' }}
                     className="t-card-img"
                     sizes="33vw"
                   />
@@ -126,8 +126,8 @@ export default function Testimonials() {
                 </div>
 
                 {/* Quote */}
-                <div style={{ padding: "14px 18px 20px" }}>
-                  <p style={{ fontSize: 13, lineHeight: 1.75, color: 'rgba(255,255,255,0.88)', fontStyle: 'italic', margin: '0 0 12px' }}>
+                <div style={{ padding: "12px 14px 16px" }}>
+                  <p style={{ fontSize: 11, lineHeight: 1.75, color: 'rgba(255,255,255,0.88)', fontStyle: 'italic', margin: '0 0 12px' }}>
                     {card.review}
                   </p>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, borderTop: `1px solid ${card.accent}33`, paddingTop: 16 }}>
@@ -135,7 +135,7 @@ export default function Testimonials() {
                       <svg width="16" height="16" viewBox="0 0 24 24" fill={card.accent}><path d="M12 2a5 5 0 1 1 0 10A5 5 0 0 1 12 2zm0 12c5.33 0 8 2.67 8 4v2H4v-2c0-1.33 2.67-4 8-4z"/></svg>
                     </div>
                     <div>
-                      <p style={{ margin: 0, fontSize: 13, fontWeight: 700, color: '#fff', fontFamily: 'var(--font-heading), Michroma, sans-serif', letterSpacing: 0.5 }}>{card.name}</p>
+                      <p style={{ margin: 0, fontSize: 11, fontWeight: 700, color: '#fff', fontFamily: 'var(--font-heading), Michroma, sans-serif', letterSpacing: 0.5 }}>{card.name}</p>
                       <p style={{ margin: 0, fontSize: 11, color: card.accent, letterSpacing: 0.5 }}>{card.role}</p>
                     </div>
                   </div>
