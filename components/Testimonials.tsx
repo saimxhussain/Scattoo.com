@@ -5,186 +5,156 @@ import Image from 'next/image'
 const cards = [
   {
     src: '/images/test_1.png',
-    alt: 'Scaled to 2X Capacity',
-    problem: "Hitting a growth ceiling — couldn't take on more clients without adding headcount.",
-    solution: 'Automated reporting and task creation so the team could focus on high-value work.',
+    name: 'Michael T.',
+    role: 'Creative Agency Owner',
     review: '"We reached a ceiling where we couldn\'t take on more clients. AgentFlow automated our reporting and task creation, freeing our team to focus on the work they actually love."',
+    color1: '#1a1a0a',
+    color2: '#3d5c00',
+    accent: '#83C732',
   },
   {
     src: '/images/test_2.png',
-    alt: '65% Reduction in Churn',
-    problem: 'Onboarding was a manual nightmare — users dropped off before completing setup.',
-    solution: 'Fully automated onboarding sequence that guides users step-by-step without any manual emails.',
+    name: 'Sarah M.',
+    role: 'Head of Customer Success',
     review: '"Onboarding used to be a nightmare for our users. AgentFlow automated the entire setup sequence, guiding users through every step without a single manual email. It\'s seamless."',
+    color1: '#0a1a0a',
+    color2: '#1a3d1a',
+    accent: '#4ade80',
   },
   {
     src: '/images/test_3.png',
-    alt: 'Instant Lead Response',
-    problem: "Losing 30% of leads due to slow follow-ups — sales reps couldn't respond fast enough.",
-    solution: 'AI-response workflow that engages every new lead in under 60 seconds, 24/7.',
+    name: 'James T.',
+    role: 'Growth Marketing Director',
     review: '"We were losing 30% of our leads to slow follow-ups. AgentFlow\'s instant AI-response workflow now engages every lead in under 60 seconds. Our conversion rate has doubled!"',
+    color1: '#0a1a14',
+    color2: '#0d3326',
+    accent: '#83C732',
   },
   {
     src: '/images/test_4.png',
-    alt: '90% Fewer Inventory Errors',
-    problem: 'Overselling across 4 platforms due to manual stock sync — 20+ hours of data entry weekly.',
-    solution: 'Real-time automated stock sync across all platforms — zero oversells, zero manual entry.',
+    name: 'Maria L.',
+    role: 'Operations Manager',
     review: '"AgentFlow automated our stock sync between 4 platforms. We stopped overselling overnight and saved 20 hours of manual data entry every week. Absolute game changer."',
+    color1: '#0f1a0a',
+    color2: '#1f3d0a',
+    accent: '#a3e635',
   },
   {
     src: '/images/test_5.png',
-    alt: 'Automated KYC Approvals',
-    problem: 'Manual KYC verification was the biggest bottleneck — slowing down every new signup.',
-    solution: 'API-integrated automation that handles 95% of KYC approvals instantly at scale.',
+    name: 'Elena K.',
+    role: 'Chief Compliance Officer',
     review: '"Manual verification was our biggest bottleneck. AgentFlow integrated our API stack to automate 95% of approvals instantly. We can finally scale without hiring a massive ops team."',
+    color1: '#0a0f1a',
+    color2: '#0a1a2e',
+    accent: '#83C732',
   },
 ]
  
 export default function Testimonials() {
-  const [active, setActive] = useState(0)
-  const [animDir, setAnimDir] = useState<'left' | 'right'>('right')
-  const [animating, setAnimating] = useState(false)
-  const card = cards[active]
- 
+  const [offset, setOffset] = useState(0)
   const touchStartX = useRef(0)
+  const visible = 3
+  const max = cards.length - visible
+ 
+  const prev = () => setOffset(o => Math.max(0, o - 1))
+  const next = () => setOffset(o => Math.min(max, o + 1))
+ 
   const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX }
   const handleTouchEnd = (e: React.TouchEvent) => {
     const delta = touchStartX.current - e.changedTouches[0].clientX
-    if (Math.abs(delta) < 40) return
-    if (delta > 0 && active < cards.length - 1) navigate(active + 1, 'right')
-    if (delta < 0 && active > 0) navigate(active - 1, 'left')
+    if (delta > 40) next()
+    if (delta < -40) prev()
   }
- 
-  const navigate = (to: number, dir: 'left' | 'right') => {
-    if (animating || to === active) return
-    setAnimDir(dir)
-    setAnimating(true)
-    setTimeout(() => { setActive(to); setAnimating(false) }, 280)
-  }
- 
-  const prev = () => navigate(active - 1, 'left')
-  const next = () => navigate(active + 1, 'right')
- 
-  const btnStyle = (disabled: boolean): React.CSSProperties => ({
-    width: 52, height: 52, borderRadius: 12,
-    border: '1px solid var(--border-2)',
-    background: disabled ? 'var(--surface-3)' : 'var(--surface-2)',
-    backdropFilter: 'blur(12px)',
-    cursor: disabled ? 'not-allowed' : 'pointer',
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-    transition: 'all 0.2s', color: disabled ? 'var(--text-6)' : 'var(--text-3)',
-  })
  
   return (
-    <section
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      style={{ padding: '120px 0', background: 'var(--bg)', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}
-    >
+    <section style={{ padding: '120px 0', background: 'var(--bg)', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}>
       <div className="orb" style={{ width: 500, height: 500, background: 'rgba(131,199,50,0.06)', top: -100, right: -100, animation: 'orbMove 20s ease-in-out infinite' }} />
  
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', position: 'relative', zIndex: 1 }}>
  
+        {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
           <span style={{ width: 28, height: 3, background: 'var(--orange)', borderRadius: 2 }} />
           <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--orange)' }}>Client Results</span>
         </div>
- 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 20 }}>
           <h2 style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 'clamp(40px, 5vw, 64px)', lineHeight: 1.05, letterSpacing: -2, color: 'var(--text)' }}>
             Real clients.<br /><span style={{ color: 'var(--orange)' }}>Real results.</span>
           </h2>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <button onClick={prev} disabled={active === 0} style={btnStyle(active === 0)}
-              onMouseEnter={e => { if (active > 0) { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--orange)'; el.style.color = 'var(--orange)' } }}
-              onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border-2)'; el.style.color = active === 0 ? 'var(--text-6)' : 'var(--text-3)' }}
-            >
+          <div style={{ display: 'flex', gap: 12 }}>
+            <button onClick={prev} disabled={offset === 0} className="t-nav-btn" style={{ opacity: offset === 0 ? 0.3 : 1 }}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
             </button>
-            <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 14, fontWeight: 600, color: 'var(--text-5)', minWidth: 44, textAlign: 'center' }}>{active + 1} / {cards.length}</span>
-            <button onClick={next} disabled={active === cards.length - 1} style={btnStyle(active === cards.length - 1)}
-              onMouseEnter={e => { if (active < cards.length - 1) { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--orange)'; el.style.color = 'var(--orange)' } }}
-              onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border-2)'; el.style.color = active === cards.length - 1 ? 'var(--text-6)' : 'var(--text-3)' }}
-            >
+            <button onClick={next} disabled={offset === max} className="t-nav-btn" style={{ opacity: offset === max ? 0.3 : 1 }}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
             </button>
           </div>
         </div>
  
-        {/* Main card */}
-        <div style={{
-          background: 'var(--surface)',
-          backdropFilter: 'blur(40px) saturate(180%)', WebkitBackdropFilter: 'blur(40px) saturate(180%)',
-          border: '1px solid var(--border-2)',
-          borderRadius: 24, overflow: 'hidden',
-          boxShadow: '0 32px 80px rgba(0,0,0,0.15)',
-          opacity: animating ? 0 : 1,
-          transform: animating ? `translateX(${animDir === 'right' ? '-24px' : '24px'})` : 'translateX(0)',
-          transition: 'opacity 0.28s ease, transform 0.28s ease',
-        }}>
-          <div className="testimonial-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }}>
- 
-            {/* LEFT — clean image, no overlays */}
-            <div style={{ position: 'relative', overflow: 'hidden', borderRight: '1px solid var(--border)' }}>
-              <Image
-                src={card.src}
-                alt={card.alt}
-                fill
-                style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
- 
-            {/* RIGHT — Problem / Solution / Review */}
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
- 
-              <div style={{ padding: '36px 36px', borderBottom: '1px solid var(--border-3)', background: 'rgba(239,68,68,0.03)', flex: 1 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                  <div style={{ width: 30, height: 30, borderRadius: 8, background: 'rgba(239,68,68,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
-                    </svg>
-                  </div>
-                  <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: '#ef4444' }}>Problem</span>
+        {/* Cards slider */}
+        <div style={{ overflow: 'hidden' }} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+          <div style={{
+            display: 'flex',
+            gap: 20,
+            transition: 'transform 0.45s cubic-bezier(0.4,0,0.2,1)',
+            transform: `translateX(calc(-${offset} * (100% / 3 + 20px / 3 * 2 + 20px / 3)))`,
+          }}>
+            {cards.map((card, i) => (
+              <div key={i} className="t-card" style={{
+                minWidth: 'calc(33.333% - 14px)',
+                borderRadius: 20,
+                overflow: 'hidden',
+                position: 'relative',
+                background: `linear-gradient(160deg, ${card.color1}, ${card.color2})`,
+                border: '1px solid rgba(131,199,50,0.15)',
+                cursor: 'pointer',
+                flexShrink: 0,
+              }}>
+                {/* Photo */}
+                <div style={{ position: 'relative', width: '100%', aspectRatio: '3/4', overflow: 'hidden' }}>
+                  <Image
+                    src={card.src}
+                    alt={card.name}
+                    fill
+                    style={{ objectFit: 'cover', objectPosition: 'center top', transition: 'transform 0.5s ease' }}
+                    className="t-card-img"
+                    sizes="33vw"
+                  />
+                  {/* color overlay */}
+                  <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to top, ${card.color2}ee 0%, transparent 50%)`, mixBlendMode: 'multiply' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to top, ${card.color1} 0%, transparent 60%)` }} />
                 </div>
-                <p style={{ fontSize: 15, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.85, margin: 0 }}>{card.problem}</p>
-              </div>
  
-              <div style={{ padding: '36px 36px', borderBottom: '1px solid var(--border-3)', background: 'var(--orange-surface)', flex: 1 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                  <div style={{ width: 30, height: 30, borderRadius: 8, background: 'rgba(131,199,50,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
+                {/* Quote */}
+                <div style={{ padding: '20px 24px 28px' }}>
+                  <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(255,255,255,0.88)', fontStyle: 'italic', margin: '0 0 20px' }}>
+                    {card.review}
+                  </p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, borderTop: `1px solid ${card.accent}33`, paddingTop: 16 }}>
+                    <div style={{ width: 36, height: 36, borderRadius: '50%', background: `${card.accent}22`, border: `1px solid ${card.accent}55`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill={card.accent}><path d="M12 2a5 5 0 1 1 0 10A5 5 0 0 1 12 2zm0 12c5.33 0 8 2.67 8 4v2H4v-2c0-1.33 2.67-4 8-4z"/></svg>
+                    </div>
+                    <div>
+                      <p style={{ margin: 0, fontSize: 13, fontWeight: 700, color: '#fff', fontFamily: 'var(--font-heading), Michroma, sans-serif', letterSpacing: 0.5 }}>{card.name}</p>
+                      <p style={{ margin: 0, fontSize: 11, color: card.accent, letterSpacing: 0.5 }}>{card.role}</p>
+                    </div>
                   </div>
-                  <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: 'var(--orange)' }}>Solution</span>
                 </div>
-                <p style={{ fontSize: 15, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.85, margin: 0 }}>{card.solution}</p>
-              </div>
  
-              <div style={{ padding: '36px 36px', background: 'var(--surface-3)', flex: 1 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                  <div style={{ width: 30, height: 30, borderRadius: 8, background: 'var(--orange-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--orange)">
-                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575z" />
-                    </svg>
-                  </div>
-                  <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: 'var(--orange)' }}>Client Review</span>
-                </div>
-                <p style={{ fontSize: 15, fontWeight: 400, color: 'var(--text-4)', lineHeight: 1.9, fontStyle: 'italic', margin: 0 }}>{card.review}</p>
+                {/* hover glow */}
+                <div className="t-card-glow" style={{ position: 'absolute', inset: 0, borderRadius: 20, border: `1px solid ${card.accent}`, opacity: 0, transition: 'opacity 0.3s ease', pointerEvents: 'none' }} />
               </div>
- 
-            </div>
+            ))}
           </div>
         </div>
  
-        {/* Dot indicators */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 32 }}>
-          {cards.map((_, i) => (
-            <button key={i} onClick={() => navigate(i, i > active ? 'right' : 'left')} style={{
-              width: i === active ? 32 : 8, height: 8, borderRadius: 4,
+        {/* Dots */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 40 }}>
+          {Array.from({ length: max + 1 }).map((_, i) => (
+            <button key={i} onClick={() => setOffset(i)} style={{
+              width: i === offset ? 32 : 8, height: 8, borderRadius: 4,
               border: 'none', padding: 0,
-              background: i === active ? 'var(--orange)' : 'var(--border-2)',
+              background: i === offset ? 'var(--orange)' : 'var(--border-2)',
               cursor: 'pointer', transition: 'all 0.3s ease',
             }} />
           ))}
@@ -192,9 +162,24 @@ export default function Testimonials() {
       </div>
  
       <style>{`
-        @media(max-width:768px){
-          .testimonial-grid{grid-template-columns:1fr !important;}
-          .testimonial-grid > div:first-child{aspect-ratio:3/4 !important; border-right:none !important; border-bottom:1px solid var(--border);}
+        .t-nav-btn {
+          width: 52px; height: 52px; border-radius: 12px;
+          border: 1px solid var(--border-2);
+          background: var(--surface-2);
+          backdrop-filter: blur(12px);
+          cursor: pointer;
+          display: flex; align-items: center; justify-content: center;
+          transition: all 0.2s;
+          color: var(--text-3);
+        }
+        .t-nav-btn:hover:not(:disabled) {
+          border-color: var(--orange);
+          color: var(--orange);
+        }
+        .t-card:hover .t-card-img { transform: scale(1.04); }
+        .t-card:hover .t-card-glow { opacity: 1 !important; }
+        @media(max-width: 768px) {
+          .t-card { min-width: calc(80% - 10px) !important; }
         }
       `}</style>
     </section>
